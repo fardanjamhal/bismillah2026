@@ -260,6 +260,7 @@
 						<div class="menu-title">Pengumuman</div>
 					</Link>
                 </li>
+                <!--
                 <li>
                     <Link href="/user/faqs" class="menu-clicked">
 						<div class="parent-icon"><i class='bx bx-message-add'></i></div>
@@ -272,6 +273,7 @@
 						<div class="menu-title">Berita</div>
 					</Link>
                 </li>
+                -->
                 <!-- <li>
 					<Link href="/user/psychology-calculators" class="menu-clicked">
 						<div class="parent-icon"><i class='bx bx-calculator'></i></div>

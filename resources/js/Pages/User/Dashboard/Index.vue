@@ -5,6 +5,7 @@
     <!--start page wrapper -->
     <div class="page-wrapper">
         <div class="page-content">
+            <!--
             <div v-if="canDisplayTransactions" class="row row-cols-1 row-cols-md-2 row-cols-xl-4">
                 <div class="col">
                     <div class="card radius-10 border-start border-0 border-3 border-warning">
@@ -54,6 +55,61 @@
                                     <h4 class="my-1">{{ totalTransactionDone }}</h4>
                                 </div>
                                 <div class="widgets-icons bg-light-primary text-primary ms-auto"><i class="bx bxs-wallet"></i></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            -->
+
+            <div class="card radius-10 border-start border-0 border-3 border-info">
+                <div class="card-body">
+                    <h6 class="mb-3">Informasi Kategori Peminatan</h6>
+                    <div class="row">
+                        <div class="col-lg-4 col-md-6 col-sm-12 mb-4" v-for="(totalDataInCategory, index) in totalDataInCategories" :key="index">
+                            <div class="card radius-10 overflow-hidden mb-0 shadow-none border border-2">
+                                <div class="card-header">
+                                    <div class="d-flex align-items-center">
+                                        <div>
+                                            <h6 class="mt-0">{{ totalDataInCategory.name }}</h6>
+                                            <div>Informasi Kategori {{ totalDataInCategory.name }}</div>
+                                        </div>
+                                        <div :class="['widgets-icons', bgColors[index % bgColors.length], textColors[index % textColors.length], 'ms-auto', 'p-3']">
+                                            <i class="bx bx-info-circle"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="card-body">
+                                    <table class="table table-sm mb-0">
+                                        <tbody>
+                                            <tr v-if="($page.props.auth.user.member_type == 1 && $page.props.setting.free_member_access.some(item => item.code === 'tryout')) || ($page.props.auth.user.member_type == 2 && $page.props.setting.paid_member_access.some(item => item.code === 'tryout'))">
+                                                <td><i class='bx bx-edit text-info font-20'></i> Tryout</td>
+                                                <td>{{ totalDataInCategory.exam_group_count }}</td>
+                                                <td><Link class="badge bg-info" :href="`/user/exam-groups/${totalDataInCategory.id}/lesson-categories`">Lihat</Link></td>
+                                            </tr>
+                                            <tr v-if="($page.props.auth.user.member_type == 1 && $page.props.setting.free_member_access.some(item => item.code === 'question_practice')) || ($page.props.auth.user.member_type == 2 && $page.props.setting.paid_member_access.some(item => item.code === 'question_practice'))">
+                                                <td><i class='bx bx-book text-success font-20'></i> Latihan Soal</td>
+                                                <td>{{ totalDataInCategory.exam_count }}</td>
+                                                <td><Link class="badge bg-info" :href="`/user/categories/${totalDataInCategory.id}/lesson-categories`">Lihat</Link></td>
+                                            </tr>
+                                            <tr v-if="($page.props.auth.user.member_type == 1 && $page.props.setting.free_member_access.some(item => item.code === 'module')) || ($page.props.auth.user.member_type == 2 && $page.props.setting.paid_member_access.some(item => item.code === 'module'))">
+                                                <td><i class='bx bx-file text-warning font-20'></i> Modul / Materi</td>
+                                                <td>{{ totalDataInCategory.module_count }}</td>
+                                                <td><Link class="badge bg-info" href="/user/modules">Lihat</Link></td>
+                                            </tr>
+                                            <tr v-if="($page.props.auth.user.member_type == 1 && $page.props.setting.free_member_access.some(item => item.code === 'video_module')) || ($page.props.auth.user.member_type == 2 && $page.props.setting.paid_member_access.some(item => item.code === 'video_module'))">
+                                                <td><i class='bx bx-video-recording text-danger font-20'></i> Video Belajar</td>
+                                                <td>{{ totalDataInCategory.video_module_count }}</td>
+                                                <td><Link class="badge bg-info" href="/user/video-modules">Lihat</Link></td>
+                                            </tr>
+                                            <tr v-if="($page.props.auth.user.member_type == 1 && $page.props.setting.free_member_access.some(item => item.code === 'course')) || ($page.props.auth.user.member_type == 2 && $page.props.setting.paid_member_access.some(item => item.code === 'course'))">
+                                                <td><i class='bx bx-chalkboard text-success font-20'></i> Course</td>
+                                                <td>{{ totalDataInCategory.course_count }}</td>
+                                                <td><Link class="badge bg-info" href="/user/courses">Lihat</Link></td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -169,59 +225,6 @@
                 </div>
             </div>
 
-            <div class="card radius-10 border-start border-0 border-3 border-info">
-                <div class="card-body">
-                    <h6 class="mb-3">Informasi Kategori Peminatan</h6>
-                    <div class="row">
-                        <div class="col-lg-4 col-md-6 col-sm-12 mb-4" v-for="(totalDataInCategory, index) in totalDataInCategories" :key="index">
-                            <div class="card radius-10 overflow-hidden mb-0 shadow-none border border-2">
-                                <div class="card-header">
-                                    <div class="d-flex align-items-center">
-                                        <div>
-                                            <h6 class="mt-0">{{ totalDataInCategory.name }}</h6>
-                                            <div>Informasi Kategori {{ totalDataInCategory.name }}</div>
-                                        </div>
-                                        <div :class="['widgets-icons', bgColors[index % bgColors.length], textColors[index % textColors.length], 'ms-auto', 'p-3']">
-                                            <i class="bx bx-info-circle"></i>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="card-body">
-                                    <table class="table table-sm mb-0">
-                                        <tbody>
-                                            <tr v-if="($page.props.auth.user.member_type == 1 && $page.props.setting.free_member_access.some(item => item.code === 'tryout')) || ($page.props.auth.user.member_type == 2 && $page.props.setting.paid_member_access.some(item => item.code === 'tryout'))">
-                                                <td><i class='bx bx-edit text-info font-20'></i> Tryout</td>
-                                                <td>{{ totalDataInCategory.exam_group_count }}</td>
-                                                <td><Link class="badge bg-info" :href="`/user/exam-groups/${totalDataInCategory.id}/lesson-categories`">Lihat</Link></td>
-                                            </tr>
-                                            <tr v-if="($page.props.auth.user.member_type == 1 && $page.props.setting.free_member_access.some(item => item.code === 'question_practice')) || ($page.props.auth.user.member_type == 2 && $page.props.setting.paid_member_access.some(item => item.code === 'question_practice'))">
-                                                <td><i class='bx bx-book text-success font-20'></i> Latihan Soal</td>
-                                                <td>{{ totalDataInCategory.exam_count }}</td>
-                                                <td><Link class="badge bg-info" :href="`/user/categories/${totalDataInCategory.id}/lesson-categories`">Lihat</Link></td>
-                                            </tr>
-                                            <tr v-if="($page.props.auth.user.member_type == 1 && $page.props.setting.free_member_access.some(item => item.code === 'module')) || ($page.props.auth.user.member_type == 2 && $page.props.setting.paid_member_access.some(item => item.code === 'module'))">
-                                                <td><i class='bx bx-file text-warning font-20'></i> Modul / Materi</td>
-                                                <td>{{ totalDataInCategory.module_count }}</td>
-                                                <td><Link class="badge bg-info" href="/user/modules">Lihat</Link></td>
-                                            </tr>
-                                            <tr v-if="($page.props.auth.user.member_type == 1 && $page.props.setting.free_member_access.some(item => item.code === 'video_module')) || ($page.props.auth.user.member_type == 2 && $page.props.setting.paid_member_access.some(item => item.code === 'video_module'))">
-                                                <td><i class='bx bx-video-recording text-danger font-20'></i> Video Belajar</td>
-                                                <td>{{ totalDataInCategory.video_module_count }}</td>
-                                                <td><Link class="badge bg-info" href="/user/video-modules">Lihat</Link></td>
-                                            </tr>
-                                            <tr v-if="($page.props.auth.user.member_type == 1 && $page.props.setting.free_member_access.some(item => item.code === 'course')) || ($page.props.auth.user.member_type == 2 && $page.props.setting.paid_member_access.some(item => item.code === 'course'))">
-                                                <td><i class='bx bx-chalkboard text-success font-20'></i> Course</td>
-                                                <td>{{ totalDataInCategory.course_count }}</td>
-                                                <td><Link class="badge bg-info" href="/user/courses">Lihat</Link></td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
         </div>
     </div>
     <!--end page wrapper -->
