@@ -41,7 +41,7 @@
                                                 <span v-if="(materialModule.user_access.length > 0)" class="badge bg-warning text-dark" style="position:absolute;">Enrolled</span>
                                             </tempate>
                                             <tempate v-if="$page.props.setting.module_material_sales_type == 2">
-                                                <span v-if="checkMemberCategories(materialModule.member_categories) == true" class="badge bg-warning text-dark" style="position:absolute;">Enrolled</span>
+                                                <span v-if="checkMemberCategories(materialModule.member_categories) == true" class="badge bg-warning text-dark" style="position:absolute;"></span>
                                             </tempate>
                                             <tempate v-if="$page.props.setting.module_material_sales_type == 3">
                                                 <span v-if="(materialModule.user_access.length > 0 || checkMemberCategories(materialModule.member_categories) == true)" class="badge bg-warning text-dark" style="position:absolute;">Enrolled</span>

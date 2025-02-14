@@ -137,8 +137,12 @@
                                         <tr>
                                             <th>No</th>
                                             <th>Modul/Materi</th>
+                                            <!--
                                             <th>Deskripsi</th>
+                                            -->
+                                            <!--
                                             <th>Diperbarui</th>
+                                            -->
                                             <th>&nbsp;</th>
                                         </tr>
                                     </thead>
@@ -151,8 +155,12 @@
                                                     <div class="font-weight-bold text-primary">{{ detail_module.title }}</div>
                                                 </div>
                                             </td>
+                                            <!--
                                             <td><div v-html="detail_module.description"></div></td>
+                                            -->
+                                            <!--
                                             <td>{{ formatDateWithTimeHourMinute(detail_module.created_at) }}</td>
+                                            -->
                                             <td><a target="_blank" :href="`/user/modules/${module.id}/detail-modules/${detail_module.id}`" class="btn btn-outline-primary btn-sm">Lihat</a></td>
                                         </tr>
                                         <tr v-else>

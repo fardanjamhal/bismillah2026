@@ -137,7 +137,9 @@
                                         <tr>
                                             <th>No</th>
                                             <th>Video Pembelajaran</th>
+                                            <!--
                                             <th>Diperbarui</th>
+                                            -->
                                             <th>&nbsp;</th>
                                         </tr>
                                     </thead>
@@ -150,7 +152,9 @@
                                                     <div class="font-weight-bold text-danger">{{ detail_video_module.title }}</div>
                                                 </div>
                                             </td>
+                                            <!--
                                             <td>{{ formatDateWithTimeHourMinute(detail_video_module.created_at) }}</td>
+                                            -->
                                             <td><Link :href="`/user/video-modules/${videoModule.id}/detail-video-modules/${detail_video_module.id}`" class="btn btn-outline-primary btn-sm">Lihat</Link></td>
                                         </tr>
                                         <tr v-else>
