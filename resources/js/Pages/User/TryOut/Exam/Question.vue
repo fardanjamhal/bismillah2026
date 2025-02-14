@@ -3,6 +3,7 @@
         <title>{{ $page.props.setting.app_name ?? 'Atur Setting Terlebih Dahulu' }} - Sesi Ujian</title>
     </Head>
 
+    <!--
     <nav class="navbar navbar-expand-lg navbar-light bg-white rounded fixed-top rounded-0 shadow-sm mb-3">
         <div class="container-fluid">
             <a class="navbar-brand" href="#">
@@ -17,6 +18,8 @@
             </div>
         </div>
     </nav>
+    -->
+    
     <div v-if="$page.props.session.error" class="alert alert-danger border-0 bg-danger alert-dismissible fade show py-2">
         <div class="d-flex align-items-center">
             <div class="font-35 text-white"><i class='bx bxs-message-square-x'></i>
@@ -28,7 +31,8 @@
         </div>
     </div>
 
-    <div style="background:#fff; display: flex; justify-content: center; align-items: center; height: 100vh;" id="timeRemainingQuestion">
+    
+    <div style="background:#fff; display: none; justify-content: center; align-items: center; height: 100vh;" id="timeRemainingQuestion">
         <VueCountdown :time="durationStartExam" @progress="handleChangeDurationStartExam" @end="showQuestionExam" v-slot="{ seconds }">
             <h2 class="mb-0 text-center">
                 <p><span style="font-size: 6vw;">{{  lastSection > 1 ? 'Persiapan Kolom ' + section : 'Ujian dimulai dari'  }}</span></p>
@@ -36,9 +40,10 @@
             </h2>
         </VueCountdown>
     </div>
+    
 
     <!--start page wrapper -->
-    <div :class="{'container-fluid': lastSection > 1, 'container': lastSection <= 1}" style="margin-top: 75px; display: none" id="questionExam">
+    <div :class="{'container-fluid': lastSection > 1, 'container': lastSection <= 1}" style="margin-top: 6vh; display: none" id="questionExam">
         <div class="row">
             <div class="col-md-12 col-sm-12 col-xs-12" :class="exam.show_question_number_navigation == 1 ? 'col-lg-8' : 'col-lg-12'">
                 <div class="card">
@@ -285,7 +290,7 @@
             const counter = ref(0);
 
             const duration = ref(props.duration);
-            const durationStartExam = ref(5000);
+            const durationStartExam = ref(0);
 
             const handleChangeDuration = (() => {
                 duration.value = duration.value - 1000;

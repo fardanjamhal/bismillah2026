@@ -15,6 +15,11 @@
                             <div class="card-body" :style="{ background: $page.props.setting.activation_page_background ?? '#fff' }">
                                 <form @submit.prevent="submit" class="row g-3">
                                     <div class="p-5">
+
+                                        <div class="text-center">
+                                            <img v-if="$page.props.setting && $page.props.setting.logo" v-bind:src="'/storage/upload_files/settings/' + $page.props.setting.logo" style="max-width: 100%; height: 100px;"/>
+                                        </div>
+
                                         <h4 class="mt-5 font-weight-bold">Aktivasi Akun</h4>
                                         <p class="text-muted">Pastikan data dibawah ini adalah nama dan email anda.</p>
                                         <div class="mb-3 mt-0">
@@ -36,7 +41,7 @@
                                         </div>
                                         <div class="d-grid gap-2">
                                             <br>
-                                            <Link :href="`/user/${user.id}/activation/actived`" class="btn btn-primary">Klik Untuk Mengaktifkan Akun</Link>
+                                            <Link :href="`/user/${user.id}/activation/actived`" class="btn btn-primary">Aktifkan Sekarang</Link>
                                         </div>
                                     </div>
                                 </form>

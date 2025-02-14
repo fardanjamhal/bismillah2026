@@ -16,6 +16,13 @@
                     <div class="card">
                         <div class="card-body" :style="{ background: $page.props.setting.register_page_background ?? '#fff' }">
                             <div class="border p-4 rounded">
+
+                                <div class="text-center">
+                                    <img v-if="$page.props.setting && $page.props.setting.logo" v-bind:src="'/storage/upload_files/settings/' + $page.props.setting.logo" style="max-width: 80%; height: 80px;"/>
+                                </div>
+
+                                <br>
+
                                 <div class="text-center">
                                     <h3 class="">Registrasi</h3>
                                     <p>Sudah memiliki akun ? <Link href="/login">Login disini</Link>
@@ -65,6 +72,15 @@
                                             </div>
                                         </div>
 
+                                        <div class="col-12" v-if="$page.props.setting.authentication_field.some(field => field.name == 'phone_number' && field.is_active == '1')">
+                                            <label class="form-label">{{ $page.props.setting.authentication_field.find(field => field.name == 'phone_number')?.translate }}</label>
+                                            <input type="text" v-model="form.phone_number" :class="{ 'is-invalid': errors.phone_number }" class="form-control" :placeholder="$page.props.setting.authentication_field.find(field => field.name == 'phone_number')?.translate">
+                                            <div v-if="errors.phone_number" class="invalid-feedback">
+                                                {{ errors.phone_number }}
+                                            </div>
+                                            <small v-if="$page.props.setting.notification_type == 1"><i>Pastikan {{ $page.props.setting.authentication_field.find(field => field.name == 'email')?.translate }} yang di daftarkan aktif untuk menerima link aktivasi.</i></small>
+                                        </div>
+
                                         <div class="col-12" v-if="$page.props.setting.authentication_field.some(field => field.name == 'password' && field.is_active == '1')">
                                             <label class="form-label">{{ $page.props.setting.authentication_field.find(field => field.name == 'password')?.translate }}</label>
                                             <div class="input-group">
@@ -99,15 +115,6 @@
                                             <div v-if="errors.gender" class="invalid-feedback">
                                                 {{ errors.gender }}
                                             </div>
-                                        </div>
-
-                                        <div class="col-12" v-if="$page.props.setting.authentication_field.some(field => field.name == 'phone_number' && field.is_active == '1')">
-                                            <label class="form-label">{{ $page.props.setting.authentication_field.find(field => field.name == 'phone_number')?.translate }}</label>
-                                            <input type="text" v-model="form.phone_number" :class="{ 'is-invalid': errors.phone_number }" class="form-control" :placeholder="$page.props.setting.authentication_field.find(field => field.name == 'phone_number')?.translate">
-                                            <div v-if="errors.phone_number" class="invalid-feedback">
-                                                {{ errors.phone_number }}
-                                            </div>
-                                            <small v-if="$page.props.setting.notification_type == 1"><i>Pastikan {{ $page.props.setting.authentication_field.find(field => field.name == 'email')?.translate }} yang di daftarkan aktif untuk menerima link aktivasi.</i></small>
                                         </div>
 
                                         <div class="col-12" v-if="$page.props.setting.authentication_field.some(field => field.name == 'province_id' && field.is_active == '1')">
@@ -172,7 +179,7 @@
                                         </div>  
 
                                         <div class="col-12" v-if="$page.props.setting.enable_affiliate_feature == 1 && referrer && referrer.referral_link">
-                                            <label class="form-label">Kode Referral Afiliasi</label>
+                                            <label class="form-label">Kode Referral</label>
                                             <input type="text" class="form-control" :value="referrer.referral_link.referral_code" readonly>
                                         </div>
 

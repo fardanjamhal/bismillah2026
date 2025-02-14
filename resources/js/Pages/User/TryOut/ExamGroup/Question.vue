@@ -3,6 +3,7 @@
         <title>{{ $page.props.setting.app_name ?? 'Atur Setting Terlebih Dahulu' }} - Tryout</title>
     </Head>
 
+    <!--
     <nav class="navbar navbar-expand-lg navbar-light bg-white rounded fixed-top rounded-0 shadow-sm">
         <div class="container-fluid">
             <a class="navbar-brand" href="#">
@@ -18,8 +19,9 @@
             </div>
         </div>
     </nav>
+    -->
 
-    <div style="background:#fff; display: flex; justify-content: center; align-items: center; height: 100vh;" id="timeRemainingQuestion">
+    <div style="background:#fff; display: none; justify-content: center; align-items: center; height: 100vh;" id="timeRemainingQuestion">
         <VueCountdown :time="durationStartExam" @progress="handleChangeDurationStartExam" @end="showQuestionExam" v-slot="{ seconds }">
             <h2 class="mb-0 text-center">
                 <p><span style="font-size: 6vw;">{{  lastSection > 1 ? 'Persiapan Kolom ' + section : 'Ujian dimulai dari'  }}</span></p>
@@ -29,7 +31,7 @@
     </div>
 
     <!--start page wrapper -->
-    <div class="container" style="margin-top: 100px;margin-bottom: 100px; display: none" id="questionExam">
+    <div class="container" style="margin-top: 6vh;margin-bottom: 100px; display: none" id="questionExam">
         <div class="row">
             <div class="col-md-12 col-sm-12 col-xs-12" :class="exam.show_question_number_navigation == 1 ? 'col-lg-8' : 'col-lg-12'">
                 <div class="card">
@@ -305,7 +307,7 @@
             const counter = ref(0);
 
             const duration = ref(props.duration);
-            const durationStartExam = ref(5000);
+            const durationStartExam = ref(0);
 
             const handleChangeDuration = (() => {
                 duration.value = duration.value - 1000;
