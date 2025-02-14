@@ -377,7 +377,7 @@
                 <li v-if="$page.props.setting.enable_affiliate_feature == 1">
                     <Link href="/user/affiliates/user-banks" class="menu-clicked">
                         <div class="parent-icon"><i class='bx bx-card'></i></div>
-                        <div class="menu-title">Akun Bank</div>
+                        <div class="menu-title">Rek Afiliasi</div>
                     </Link>
                 </li>
                 <li class="menu-label">Manajemen Akun</li>

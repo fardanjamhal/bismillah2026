@@ -28,11 +28,13 @@
                     <div class="input-group flex-md-nowrap flex-wrap">
                         <input type="text" v-model="form.search" class="form-control form-control-sm sm-2" placeholder="Judul Latihan ....">
 
+                        <!--
                         <select v-model="form.sub_category_id" class="form-control form-control-sm sm-2">
                             <option value="">[ Kategori ]</option>
                             <option v-for="(category, index) in subCategories" :key="index" :value="category.id">
                                 {{ category.name }}</option>
                         </select>
+                        -->
 
                         <button @click.prevent="handleSearch" class="btn btn-primary btn-sm"><i class="bx bx-filter"></i></button>
                         <Link :href="`/user/categories/${categoryId}/lesson-categories/${lessonCategoryId}/lessons/${lessonId}/exams`" class="btn btn-danger btn-sm"><i class="bx bx-refresh"></i></Link>
@@ -55,22 +57,28 @@
                                                 {{ subCategory.name }}
                                             </span>
                                         </template>
+                                        <!--
                                         <span v-else class="badge bg-danger">
                                             Seluruh Peminatan {{ exam.category.name }}
                                         </span>
+                                        -->
                                     </p>
 
                                     <!-- Kategori Member -->
                                     <p class="mb-1">
                                         <template v-if="($page.props.setting.practice_question_sales_type == 2 || $page.props.setting.practice_question_sales_type == 3) && $page.props.auth.user.member_type == 2">
                                             <template v-if="exam.member_categories && exam.member_categories.length">
+                                                <!--
                                                 <span v-for="(memberCategory, subIndex) in exam.member_categories" :key="subIndex" class="badge bg-success me-1">
                                                     {{ memberCategory.name }}
                                                 </span>
+                                                -->
                                             </template>
+                                            <!--
                                             <span v-else class="badge bg-success">
                                                 Seluruh Member & Non Member
                                             </span>
+                                            -->
                                         </template>
                                     </p>
                                 </div>
@@ -83,7 +91,7 @@
                                             <span class="badge bg-success" style="position:absolute; left:-10px;top:-5px; font-size:10px; z-index:2;">Enrolled</span>
                                         </tempate>
                                         <tempate v-if="$page.props.setting.practice_question_sales_type == 2 && exam.member_categories.length > 0 && checkMemberCategories(exam.member_categories) == true">
-                                            <span class="badge bg-success" style="position:absolute; left:-10px;top:-5px; font-size:10px; z-index:2;">Enrolled</span>
+                                            <span class="badge bg-success" style="position:absolute; left:-10px;top:-5px; font-size:10px; z-index:2;"></span>
                                         </tempate>
                                         <tempate v-if="$page.props.setting.practice_question_sales_type == 3 && (exam.user_access.length > 0 || checkMemberCategories(exam.member_categories) == true)">
                                             <span class="badge bg-success" style="position:absolute; left:-10px;top:-5px; font-size:10px; z-index:2;">Enrolled</span>
