@@ -181,7 +181,7 @@
                                                     <template v-if="checkMemberCategories(exam.member_categories) == true">
                                                         <Link :href="`/user/exam-groups/${lessonCategory.category_id}/lesson-categories/${lessonCategory.id}/exams/${exam.id}`" class="btn btn-sm btn-primary me-1">Kerjakan</Link>
                                                     </template>
-                                                    /fardanEDIT FARDAN/fardan
+                                                    /fardanEDIT FARDANfardan
                                                     <template v-else>
                                                         <Link :href="`/user/vouchers?category_id=${exam.category_id}`" class="btn btn-sm btn-success">
                                                             <span v-if="exam.member_categories.length == 1">Upgrade Ke {{ exam.member_categories[0].name }}</span>
@@ -236,9 +236,9 @@
             <!--EDIT FARDAN-->
             
             <!--EDIT FARDAN2-->
-            <div class="row mb-3" v-if="examGroups.data.length > 0">
+            <div class="row mb-3" v-if="examGroups.data.length">
                 <div class="col-lg-12">
-                    <div class="d-flex justify-content-center" v-if="examGroups.links.length">
+                    <div class="d-flex justify-content-center" style="min-height: 0vh;">
                         <Pagination :links="examGroups.links"/>
                     </div>
                 </div>
