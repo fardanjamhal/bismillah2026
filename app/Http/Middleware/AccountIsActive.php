@@ -20,7 +20,7 @@ class AccountIsActive
     {
         if(auth()->user()->is_active == 0) {
             Auth::logout();
-            return redirect('login')->with('success', 'Akun anda berhasil didaftarkan, silakan cek whatsapp untuk aktivasi.');
+            return redirect('login')->with('success', 'Akun anda berhasil didaftarkan, silakan cek email untuk aktivasi.');
         }
         return $next($request);
     }
