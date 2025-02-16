@@ -12,7 +12,7 @@
                     <nav aria-label="breadcrumb">
                         <ol class="breadcrumb mb-0 p-0">
                             <li class="breadcrumb-item"><a href="javascript:;"><i class="bx bx-home-alt"></i></a></li>
-                            <li class="breadcrumb-item active" aria-current="page">Soal</li>
+                            <li class="breadcrumb-item active" aria-current="page">Soal22</li>
                         </ol>
                     </nav>
                 </div>
@@ -42,12 +42,50 @@
                 </div>
             </div>
 
+            <!--EDIT FARDAN-->
+
+            <div class="card mb-0">
+                <div class="card-body p-3">
+                    <div class="list-group">
+                        <div v-if="exams.data.length" class="list-group-item list-group-item-action p-3 d-flex justify-content-between align-items-center border rounded shadow-sm" v-for="(exam, index) in exams.data" :key="index">
+
+                            
+                            
+                            <!-- Kolom Kiri: Judul -->
+                            <div class="exam-title">
+                                <h6 class="text-dark fw-semibold mb-0">{{ exam.title }}</h6>
+                            </div>
+
+                            <!-- Kolom Kanan: Tombol -->
+                            <div class="exam-action">
+                                <template v-if="$page.props.setting.practice_question_sales_type == 2">
+                                    <template v-if="checkMemberCategories(exam.member_categories) == true">
+                                        <Link :href="`/user/categories/${exam.category_id}/lesson-categories/${exam.lesson_category_id}/lessons/${exam.lesson_id}/exams/${exam.id}`" class="btn btn-sm btn-primary me-1">Kerjakan</Link>
+                                     </template>
+                                    <template v-else>
+                                        <Link :href="`/user/vouchers?category_id=${exam.category_id}`" class="btn btn-outline-success">
+                                        <span v-if="exam.member_categories.length == 1">Upgrade {{ exam.member_categories[0] ? exam.member_categories[0].name : '' }}</span>
+                                        <span v-else>Upgrade Member</span>
+                                        </Link>
+                                    </template>
+                            </template>
+                            </div>
+                        </div>
+
+                        <div v-else class="list-group-item text-center">
+                            <h6>Tryout Tidak Tersedia</h6>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!--
             <div class="card mb-0">
                 <div class="card-body p-3">
                     <div class="list-group">
                         <div v-if="exams.data.length" class="list-group-item list-group-item-action p-2 mb-2 border" v-for="(exam, index) in exams.data" :key="index">
                             <div class="d-flex flex-column flex-md-row">
-                                <!-- Judul, Deskripsi, Kategori, dan Sub Kategori -->
+                                /fardan Judul, Deskripsi, Kategori, dan Sub Kategori fardan
                                 <div class="flex-grow-1 text-center text-sm-start">
                                     <h6 class="my-2">{{ exam.title }}</h6>
                                     
@@ -57,35 +95,35 @@
                                                 {{ subCategory.name }}
                                             </span>
                                         </template>
-                                        <!--
+                                        /fardan
                                         <span v-else class="badge bg-danger">
                                             Seluruh Peminatan {{ exam.category.name }}
                                         </span>
-                                        -->
+                                        fardan
                                     </p>
 
-                                    <!-- Kategori Member -->
+                                    /fardan Kategori Member fardan
                                     <p class="mb-1">
                                         <template v-if="($page.props.setting.practice_question_sales_type == 2 || $page.props.setting.practice_question_sales_type == 3) && $page.props.auth.user.member_type == 2">
                                             <template v-if="exam.member_categories && exam.member_categories.length">
-                                                <!--
+                                                /fardan
                                                 <span v-for="(memberCategory, subIndex) in exam.member_categories" :key="subIndex" class="badge bg-success me-1">
                                                     {{ memberCategory.name }}
                                                 </span>
-                                                -->
+                                                fardan
                                             </template>
-                                            <!--
+                                            /fardan
                                             <span v-else class="badge bg-success">
                                                 Seluruh Member & Non Member
                                             </span>
-                                            -->
+                                            fardan
                                         </template>
                                     </p>
                                 </div>
                                 
-                                <!-- Action Links -->
+                                /fardan Action Links fardan
                                 <div class="d-flex flex-column action-button-exams text-center text-md-end">
-                                    <!-- Bagian Harga -->
+                                    fardan Bagian Harga fardan
                                     <div v-if="$page.props.auth.user.member_type == 2">
                                         <tempate v-if="$page.props.setting.practice_question_sales_type == 1 && exam.user_access.length > 0">
                                             <span class="badge bg-success" style="position:absolute; left:-10px;top:-5px; font-size:10px; z-index:2;">Enrolled</span>
@@ -120,7 +158,7 @@
                                         <span class="badge bg-warning text-dark" style="position:absolute; left:-10px;top:-5px; font-size:10px; z-index:1;">Gratis</span>
                                     </div> 
 
-                                    <!-- Bagian Tombol -->
+                                    fardan Bagian Tombol fardan
                                     <div>
                                         <div v-if="exam.exam_status == 'active'">
                                             <template v-if="$page.props.auth.user.member_type == 2 && $page.props.setting.enable_practice_question_sales == 1">
@@ -187,6 +225,9 @@
                     </div>
                 </div>
             </div>
+            -->
+            <!--EDIT FARDAN-->
+
 
             <div class="row mb-3" v-if="exams.data.length">
                 <div class="col-lg-12">
@@ -313,6 +354,45 @@
     }
 </script>
 
+<!--edit fardan-->
+<style>
+.exam-title {
+    font-size: 16px;
+    font-weight: 600;
+    color: #333;
+}
+
+.exam-action .btn {
+    font-size: 14px;
+    font-weight: 500;
+    border-radius: 8px;
+    padding: 8px 20px;
+    transition: all 0.3s ease-in-out;
+}
+
+.exam-action .btn-primary {
+    background-color: #007bff;
+    border: none;
+    color: white;
+}
+
+.exam-action .btn-primary:hover {
+    background-color: #0056b3;
+}
+
+.exam-action .btn-outline-success {
+    border-color: #28a745;
+    color: #28a745;
+}
+
+.exam-action .btn-outline-success:hover {
+    background-color: #28a745;
+    color: white;
+}
+</style>
+<!--edit fardan-->
+
+<!--
 <style>
    .action-button-exams {
         display: flex;
@@ -345,3 +425,4 @@
         }
     }
 </style>
+-->
