@@ -67,7 +67,7 @@ class ExamGroupController extends Controller
     public function examGroupList(Request $request, $categoryId, $lessonCategoryId)
     {
         return inertia('User/TryOut/ExamGroup/Exam', [
-            'examGroups' => $this->examGroupRepository->getByLessonCategory($request, $lessonCategoryId, 20),
+            'examGroups' => $this->examGroupRepository->getByLessonCategory($request, $lessonCategoryId, 50),
             'lessonCategory' => (new LessonCategoryRepository())->find($lessonCategoryId),
             'subCategories' => (new SubCategoryRepository())->getByCategoryId($categoryId),
             'userMemberCategories' => MemberCategoryUser::where('category_id', $categoryId)->where('user_id', Auth::user()->id)->where('expired_date', '>', Carbon::now())->get()

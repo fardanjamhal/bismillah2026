@@ -4039,11 +4039,31 @@ textarea.form-control-lg {
 	border: var(--bs-pagination-border-width) solid var(--bs-pagination-border-color);
 	transition: color .15s ease-in-out, background-color .15s ease-in-out, border-color .15s ease-in-out, box-shadow .15s ease-in-out
 }
-@media (prefers-reduced-motion:reduce) {
-	.page-link {
-		transition: none
-	}
+/* Menyesuaikan pagination pada perangkat mobile dengan ukuran lebih kecil */
+@media (max-width: 576px) {
+    .pagination {
+        --bs-pagination-font-size: 1rem; /* Ukuran font lebih kecil untuk perangkat kecil */
+    }
+
+    .page-link {
+        padding: 0.2rem 0.5rem; /* Mengurangi padding pada page-link */
+    }
 }
+
+/* Responsif untuk ukuran tablet atau lebih besar */
+@media (min-width: 577px) and (max-width: 991px) {
+    .pagination {
+        --bs-pagination-font-size: 1rem; /* Menyesuaikan ukuran font untuk tablet */
+    }
+}
+
+/* Agar tidak ada animasi berlebih pada animasi transisi */
+@media (prefers-reduced-motion: reduce) {
+    .page-link {
+        transition: none;
+    }
+}
+
 .page-link:hover {
 	z-index: 2;
 	color: var(--bs-pagination-hover-color);
