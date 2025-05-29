@@ -99,20 +99,15 @@ class VideoModuleController extends Controller
         ]);
     }
 
-    function checkMemberCategories($userMemberCategories, $videoModuleCategories) 
-        {
-    // Jika videoModuleCategories kosong (tidak ada batasan kategori), beri akses true
-    if (empty($videoModuleCategories) || count($videoModuleCategories) == 0) {
-        return true;
-    }
+    function checkMemberCategories($data, $categories) 
+    {
+        if ($categories && count($categories) > 0) {
+            $memberCategoryIds = $data->toArray(); 
+            $memberCategoryIds = $memberCategoryIds; 
 
-    // Jika userMemberCategories kosong (user tidak punya kategori), akses ditolak (false)
-    if (empty($userMemberCategories) || count($userMemberCategories) == 0) {
-        return false;
+            return count(array_intersect($memberCategoryIds, $categories)) > 0;
+        } else {
+            return true;
+        }
     }
-
-    // Cek ada tidaknya irisan kategori antara user dan video module
-    return count(array_intersect($userMemberCategories, $videoModuleCategories)) > 0;
-    }
-
 }
