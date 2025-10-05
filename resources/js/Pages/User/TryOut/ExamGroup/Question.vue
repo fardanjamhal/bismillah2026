@@ -53,6 +53,8 @@
                             </div>
                         </div>
                     </div>
+
+                    <!-- fardan tampilan soal-->
                     <div class="card-body">
                         <div v-if="questionLists[indexPage]">
                             <div>
@@ -91,6 +93,8 @@
                             </div>
                         </div>
                     </div>
+                     <!-- fardan tampilan soal-->
+                    
                     <div class="mt-3 mb-3 m-3" v-if="exam.type_option == 2">
                         <span v-for="(answer, index) in questionLists[indexPage]['answer_order'].split(',')" :key="index">
                             <button v-if="getMyAnswer(questionLists[indexPage]['question_id']).includes(Number(answer))"  @click="submitAnswer(questionLists[indexPage]['question_id'], answer)" class="btn btn-secondary text-dark px-lg-5 px-md-5 mb-1 mx-1 rounded-3 no-click-effect-section" style="background-color: #ccc;">{{ options[index] }}</button>
@@ -129,6 +133,7 @@
                             </div>
                         </div>
                     </div>
+                    
                     <div class="card-body" style="height: 480px; overflow-y: auto">
                         <div v-for="(question, index) in questionLists" :key="index">
                             <div style="width: 20%; float: left;">
@@ -140,6 +145,7 @@
                             </div>
                         </div>
                     </div>
+
                     <div class="card-footer" style="min-height: 60px;">
 
                         <div v-if="exam.button_type_finish == 1">

@@ -331,13 +331,17 @@
             }
 
             const checkMemberCategories = (categories) => {
-                if (categories.length > 0) {
-                    const categoryIds = categories.map(category => category.id);
-                    return props.userMemberCategories.some(entry => categoryIds.includes(entry.member_category_id));
-                } else {
-                    return true;
-                }
-            };
+                    categories = categories || []; // pastikan selalu array
+                    const userCategories = props.userMemberCategories || [];
+
+                    if (categories.length > 0) {
+                        const categoryIds = categories.map(category => String(category.id));
+                        return userCategories.some(entry => categoryIds.includes(String(entry.member_category_id)));
+                    } else {
+                        return true; // tetap sesuai logika lama
+                    }
+                };
+
 
             return {
                 form, 
