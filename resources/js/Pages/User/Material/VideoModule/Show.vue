@@ -189,13 +189,19 @@ export default {
     },
     setup(props) {
         const checkMemberCategories = (categories) => {
+            categories = categories || []; // pastikan selalu array
+            const userCategories = props.userMemberCategories || []; // fallback jika user data kosong
+
             if (categories.length > 0) {
-                const categoryIds = categories.map(category => category.id);
-                return props.userMemberCategories.some(entry => categoryIds.includes(entry.member_category_id));
+                // konversi semua id ke string agar perbandingan konsisten
+                const categoryIds = categories.map(category => String(category.id));
+                return userCategories.some(entry => categoryIds.includes(String(entry.member_category_id)));
             } else {
+                // jika categories kosong, dianggap bisa diakses
                 return true;
             }
         };
+
 
         return {
             checkMemberCategories

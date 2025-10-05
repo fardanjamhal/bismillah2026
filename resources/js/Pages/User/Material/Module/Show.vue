@@ -194,14 +194,22 @@ export default {
         userMemberCategories: Object,
     },
     setup(props) {
-        const checkMemberCategories = (categories) => {
+       const checkMemberCategories = (categories) => {
+            // Pastikan categories selalu array
+            categories = categories || [];
+            // Pastikan userMemberCategories selalu array
+            const userCategories = props.userMemberCategories || [];
+
             if (categories.length > 0) {
-                const categoryIds = categories.map(category => category.id);
-                return props.userMemberCategories.some(entry => categoryIds.includes(entry.member_category_id));
+                // Konversi semua ID ke string agar perbandingan konsisten
+                const categoryIds = categories.map(category => String(category.id));
+                return userCategories.some(entry => categoryIds.includes(String(entry.member_category_id)));
             } else {
+                // Jika categories kosong, dianggap bisa diakses
                 return true;
             }
         };
+
 
         return {
             checkMemberCategories
