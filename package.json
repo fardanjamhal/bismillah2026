@@ -9,7 +9,7 @@
         "laravel-vite-plugin": "^0.6.0",
         "lodash": "^4.17.19",
         "postcss": "^8.1.14",
-        "vite": "^3.0.0"
+        "vite": "^4.5.14"
     },
     "dependencies": {
         "@chenfengyuan/vue-countdown": "^2.0.0",
@@ -20,8 +20,9 @@
         "@splidejs/vue-splide": "^0.6.12",
         "@suadelabs/vue3-multiselect": "^1.0.2",
         "@vitejs/plugin-vue": "^3.0.1",
-        "@wiris/mathtype-ckeditor5": "^8.10.0",
-        "ckeditor5": "^42.0.2",
+        "@wiris/mathtype-ckeditor5": "^8.13.4",
+        "apexcharts": "^5.3.5",
+        "ckeditor5": "^47.0.0",
         "esbuild": "^0.24.2",
         "jquery": "^3.6.1",
         "jquery-resizable-dom": "^0.35.0",
