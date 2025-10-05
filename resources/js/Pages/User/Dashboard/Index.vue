@@ -64,7 +64,7 @@
 
             <div class="card radius-10 border-start border-0 border-3 border-info">
                 <div class="card-body">
-                    <h6 class="mb-3">Informasi Kategori Peminatan2</h6>
+                    <h6 class="mb-3">Informasi Kategori Peminatan</h6>
                     <div class="row">
                         <div class="col-lg-4 col-md-6 col-sm-12 mb-4" v-for="(totalDataInCategory, index) in totalDataInCategories" :key="index">
                             <div class="card radius-10 overflow-hidden mb-0 shadow-none border border-2">

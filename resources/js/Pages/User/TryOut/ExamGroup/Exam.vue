@@ -53,30 +53,26 @@
                             v-for="(exam, index) in examGroups.data" 
                             :key="index">
                             
-                            <div class="exam-container">
-                                
-                                <!-- Kolom Kiri: Judul -->
-                                <div class="exam-info">
-                                    <h6 class="text-dark fw-semibold">{{ exam.title }}</h6>
-                                </div>
-
-                                <!-- Kolom Kanan: Tombol -->
-                                <div class="exam-action">
-                                    <template v-if="checkMemberCategories(exam.member_categories)">
-                                        <Link :href="`/user/exam-groups/${lessonCategory.category_id}/lesson-categories/${lessonCategory.id}/exams/${exam.id}`" 
-                                            class="btn btn-primary">
-                                            <i class="fas fa-pencil-alt me-2"></i> Kerjakan
-                                        </Link>
-                                    </template>
-                                    <template v-else>
-                                        <Link :href="`/user/vouchers?category_id=${exam.category_id}`" 
-                                            class="btn btn-outline-success">
-                                            Upgrade Member
-                                        </Link>
-                                    </template>
-                                </div>
-
+                          <div class="exam-container" v-if="exam && lessonCategory">
+                            <div class="exam-info">
+                                <h6 class="text-dark fw-semibold">{{ exam.title }}</h6>
                             </div>
+                            <div class="exam-action">
+                                <template v-if="checkMemberCategories(exam.member_categories)">
+                                    <Link :href="`/user/exam-groups/${lessonCategory?.category_id}/lesson-categories/${lessonCategory?.id}/exams/${exam?.id}`" 
+                                        class="btn btn-primary">
+                                        <i class="fas fa-pencil-alt me-2"></i> Kerjakan
+                                    </Link>
+                                </template>
+                                <template v-else>
+                                    <Link :href="`/user/vouchers?category_id=${exam?.category_id}`" 
+                                        class="btn btn-outline-success">
+                                        Upgrade Member
+                                    </Link>
+                                </template>
+                            </div>
+                        </div>
+
                         </div>
                         <div v-else class="list-group-item list-group-item-action order text-center">
                             <h6>Tryout Tidak Tersedia</h6>
@@ -337,12 +333,9 @@
             }
 
             const checkMemberCategories = (categories) => {
-                if (categories.length > 0) {
-                    const categoryIds = categories.map(category => category.id);
-                    return props.userMemberCategories.some(entry => categoryIds.includes(entry.member_category_id));
-                } else {
-                    return true;
-                }
+                if (!categories || !categories.length) return true; // guard jika null/undefined
+                const categoryIds = categories.map(category => category.id);
+                return props.userMemberCategories.some(entry => categoryIds.includes(entry.member_category_id));
             };
 
             return {
