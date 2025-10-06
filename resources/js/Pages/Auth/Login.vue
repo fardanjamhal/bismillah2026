@@ -335,11 +335,11 @@
                     background: linear-gradient(90deg, #2563eb, #1d4ed8);
                     color: #ffffff;
                     font-weight: 600;
-                    font-size: 1.1rem;
+                    font-size: 1rem;
                     letter-spacing: 0.3px;
                     border: none;
                     border-radius: 12px;
-                    padding: 12px 0;
+                    padding: 10px 0;
                     cursor: pointer;
                     box-shadow: 0 4px 15px rgba(37, 99, 235, 0.3);
                     transition: all 0.3s ease;
@@ -354,15 +354,74 @@
 
 
                 <div class="text-center mt-3 small">
-                  <div v-if="$page?.props?.setting?.add_user_registration == 1">
-                    Belum punya akun? <Link href="/register" class="link-accent fw-semibold">Daftar sekarang</Link>
-                  </div>
+                 <div 
+                  v-if="$page?.props?.setting?.add_user_registration == 1"
+                  style="
+                    display:flex;
+                    justify-content:center;
+                    align-items:center;
+                    gap:0.6rem;
+                    margin-top:1.8rem;
+                    flex-wrap:nowrap;
+                    font-family:'Inter',sans-serif;
+                    white-space:nowrap;
+                    overflow:hidden;
+                  "
+                >
+                  <span 
+                    style="
+                      font-size:0.9rem;
+                      color:#6b7280;
+                      letter-spacing:0.2px;
+                    "
+                  >
+                    Belum punya akun?
+                  </span>
+
+                  <Link
+                    href='/register'
+                    style="
+                      display:inline-flex;
+                      align-items:center;
+                      justify-content:center;
+                      gap:0.5rem;
+                      padding:0.55rem 1rem;
+                      border:none;
+                      border-radius:50px;
+                      background:linear-gradient(90deg, #2563eb, #1d4ed8);
+                      color:#fff;
+                      font-weight:600;
+                      font-size:0.9rem;
+                      letter-spacing:0.1px;
+                      text-decoration:none;
+                      box-shadow:0 4px 12px rgba(99,102,241,0.3);
+                      cursor:pointer;
+                      transition:all 0.35s ease;
+                      transform:translateY(0);
+                      flex-shrink:0;
+                    "
+                    onmouseover="this.style.transform='translateY(0px) scale(1.05)'; this.style.boxShadow='0 8px 20px rgba(37,99,235,0.35)'; this.style.background='linear-gradient(90deg, #2563eb, #1d4ed8)';"
+                    onmouseout="this.style.transform='translateY(0) scale(1)'; this.style.boxShadow='0 4px 12px rgba(99,102,241,0.3)'; this.style.background='linear-gradient(90deg, #2563eb, #1d4ed8)';"
+                  >
+                    <svg xmlns='http://www.w3.org/2000/svg' width='17' height='17' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round'>
+                      <path d='M12 11a2 2 0 100-4 2 2 0 000 4z'/>
+                      <path d='M20 21v-1a4 4 0 00-4-4H8a4 4 0 00-4 4v1'/>
+                      <path d='M16 5V3m4 4V5M4 5V3'/>
+                    </svg>
+                    <span>Daftar Sekarang</span>
+                  </Link>
+                </div>
+
+
+                  <!--
                   <a
                     class="btn btn-outline-secondary btn-sm rounded-pill mt-2"
                     :href="`https://wa.me/${$page?.props?.setting?.whatsapp_number || ''}?text=${encodeURI('Hallo, Admin. saya ingin bertanya....')}`"
                     target="_blank"
                     rel="noopener"
                   >Hubungi Admin</a>
+                  -->
+
                 </div>
               </form>
             </div>

@@ -1,490 +1,346 @@
 <template>
-    <Head>
-        <title>{{ $page.props.setting.app_name ?? 'Atur Setting Terlebih Dahulu' }} - Soal</title>
-    </Head>
-    <!--start page wrapper -->
-    <div class="page-wrapper">
-        <div class="page-content">
-            <!--breadcrumb-->
-            <div class="page-breadcrumb d-none d-sm-flex align-items-center mb-3">
-                <div class="breadcrumb-title pe-3">Latihan Soal</div>
-                <div class="ps-3">
-                    <nav aria-label="breadcrumb">
-                        <ol class="breadcrumb mb-0 p-0">
-                            <li class="breadcrumb-item"><a href="javascript:;"><i class="bx bx-home-alt"></i></a></li>
-                            <li class="breadcrumb-item active" aria-current="page">Soal</li>
-                        </ol>
-                    </nav>
-                </div>
-                <div class="ms-auto">
-                    <Link :href="`/user/categories/${categoryId}/lesson-categories/${lessonCategoryId}/lessons`" class="btn btn-primary btn-sm mt-2 mt-lg-0">Kembali</Link>
-                </div>
-            </div>
-            <!--end breadcrumb-->
-            <hr/>
+  <Head>
+    <title>{{ $page.props.setting.app_name ?? 'Atur Setting Terlebih Dahulu' }} - Soal</title>
+  </Head>
 
-            <div class="card">
-                <div class="card-body bg-light p-3 rounded-3">
-                    <div class="input-group flex-md-nowrap flex-wrap">
-                        <input type="text" v-model="form.search" class="form-control form-control-sm sm-2" placeholder="Judul Latihan ....">
+  <!--start page wrapper -->
+  <div class="page-wrapper">
+    <div class="page-content">
 
-                        <!--
-                        <select v-model="form.sub_category_id" class="form-control form-control-sm sm-2">
-                            <option value="">[ Kategori ]</option>
-                            <option v-for="(category, index) in subCategories" :key="index" :value="category.id">
-                                {{ category.name }}</option>
-                        </select>
-                        -->
-
-                        <button @click.prevent="handleSearch" class="btn btn-primary btn-sm"><i class="bx bx-filter"></i></button>
-                        <Link :href="`/user/categories/${categoryId}/lesson-categories/${lessonCategoryId}/lessons/${lessonId}/exams`" class="btn btn-danger btn-sm"><i class="bx bx-refresh"></i></Link>
-                    </div>
-                </div>
-            </div>
-
-            <!--EDIT FARDAN-->
-            <!--
-            <div class="card mb-0">
-                <div class="card-body p-3">
-                    <div class="list-group">
-                        <div v-if="exams.data.length" class="list-group-item list-group-item-action p-3 d-flex justify-content-between align-items-center border rounded shadow-sm" v-for="(exam, index) in exams.data" :key="index">
-
-                            <div class="exam-title">
-                                <h6 class="text-dark fw-semibold mb-0">{{ exam.title }}</h6>
-                            </div>
-
-                            <div class="exam-action">
-                                <template v-if="$page.props.setting.practice_question_sales_type == 2">
-                                    <template v-if="checkMemberCategories(exam.member_categories) == true">
-                                        <Link :href="`/user/categories/${exam.category_id}/lesson-categories/${exam.lesson_category_id}/lessons/${exam.lesson_id}/exams/${exam.id}`" class="btn btn-sm btn-primary me-1">Kerjakan</Link>
-                                     </template>
-                                    <template v-else>
-                                        <Link :href="`/user/vouchers?category_id=${exam.category_id}`" class="btn btn-outline-success">
-                                        <span v-if="exam.member_categories.length == 1">Upgrade {{ exam.member_categories[0] ? exam.member_categories[0].name : '' }}</span>
-                                        <span v-else>Upgrade Member</span>
-                                        </Link>
-                                    </template>
-                            </template>
-                            </div>
-                        </div>
-
-                        <div v-else class="list-group-item text-center">
-                            <h6>Tryout Tidak Tersedia</h6>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            -->
-
-            <div class="card mb-0" style="background-color: #f8f9fc; border: none; border-radius: 16px;">
-                <div class="card-body">
-                    <div class="row g-3">
-
-                    <!-- Kotak Tryout -->
-                    <div v-for="(exam, index) in exams.data" :key="index" class="col-6 col-md-4 col-lg-2">
-                        <div
-                        class="text-center p-3 h-100 rounded-4 shadow-sm"
-                        style="background-color: #ffffff; border: 1px solid #e0e6ed; transition: all 0.25s ease; cursor: pointer;"
-                        @mouseover="event.currentTarget.style.transform='translateY(-4px)'; event.currentTarget.style.boxShadow='0 6px 16px rgba(0,0,0,0.1)'"
-                        @mouseleave="event.currentTarget.style.transform='none'; event.currentTarget.style.boxShadow='0 2px 6px rgba(0,0,0,0.05)'"
-                        >
-
-                        <!-- Judul -->
-                        <h6 class="fw-bold mb-2" style="color: #1f1f1f; font-size: 1rem;">{{ exam.title }}</h6>
-
-                        <!-- Tombol Aksi -->
-                        <div class="mt-auto">
-                            <template v-if="$page.props.setting.practice_question_sales_type == 2">
-                            <template v-if="checkMemberCategories(exam.member_categories)">
-                                <Link
-                                :href="`/user/categories/${exam.category_id}/lesson-categories/${exam.lesson_category_id}/lessons/${exam.lesson_id}/exams/${exam.id}`"
-                                class="fw-semibold px-3 py-1 mt-2 d-inline-block"
-                                style="background-color: #0d6efd; color: #fff; border-radius: 30px; text-decoration: none; transition: background-color 0.2s;"
-                                @mouseover="event.currentTarget.style.backgroundColor='#0b5ed7'"
-                                @mouseleave="event.currentTarget.style.backgroundColor='#0d6efd'"
-                                >
-                                Kerjakan
-                                </Link>
-                            </template>
-
-                            <template v-else>
-                                <Link
-                                :href="`/user/vouchers?category_id=${exam.category_id}`"
-                                class="fw-semibold px-3 py-1 mt-2 d-inline-block"
-                                style="border: 1px solid #198754; color: #198754; border-radius: 30px; text-decoration: none; transition: all 0.2s;"
-                                @mouseover="event.currentTarget.style.backgroundColor='#198754'; event.currentTarget.style.color='#fff'"
-                                @mouseleave="event.currentTarget.style.backgroundColor='transparent'; event.currentTarget.style.color='#198754'"
-                                >
-                                <span v-if="exam.member_categories.length == 1">
-                                    Upgrade {{ exam.member_categories[0] ? exam.member_categories[0].name : '' }}
-                                </span>
-                                <span v-else>Upgrade Member</span>
-                                </Link>
-                            </template>
-                            </template>
-                        </div>
-
-                        </div>
-                    </div>
-
-                    <!-- Jika tidak ada data -->
-                    <div v-if="!exams.data.length" class="col-12 text-center mt-3">
-                        <h6 style="color:#555;">Tryout Tidak Tersedia</h6>
-                    </div>
-
-                    </div>
-                </div>
-                </div>
-
-
-            <!--
-            <div class="card mb-0">
-                <div class="card-body p-3">
-                    <div class="list-group">
-                        <div v-if="exams.data.length" class="list-group-item list-group-item-action p-2 mb-2 border" v-for="(exam, index) in exams.data" :key="index">
-                            <div class="d-flex flex-column flex-md-row">
-                                /fardan Judul, Deskripsi, Kategori, dan Sub Kategori fardan
-                                <div class="flex-grow-1 text-center text-sm-start">
-                                    <h6 class="my-2">{{ exam.title }}</h6>
-                                    
-                                    <p class="mb-1">
-                                        <template v-if="exam.sub_categories && exam.sub_categories.length">
-                                            <span v-for="(subCategory, subIndex) in exam.sub_categories" :key="subIndex" class="badge bg-danger me-1">
-                                                {{ subCategory.name }}
-                                            </span>
-                                        </template>
-                                        /fardan
-                                        <span v-else class="badge bg-danger">
-                                            Seluruh Peminatan {{ exam.category.name }}
-                                        </span>
-                                        fardan
-                                    </p>
-
-                                    /fardan Kategori Member fardan
-                                    <p class="mb-1">
-                                        <template v-if="($page.props.setting.practice_question_sales_type == 2 || $page.props.setting.practice_question_sales_type == 3) && $page.props.auth.user.member_type == 2">
-                                            <template v-if="exam.member_categories && exam.member_categories.length">
-                                                /fardan
-                                                <span v-for="(memberCategory, subIndex) in exam.member_categories" :key="subIndex" class="badge bg-success me-1">
-                                                    {{ memberCategory.name }}
-                                                </span>
-                                                fardan
-                                            </template>
-                                            /fardan
-                                            <span v-else class="badge bg-success">
-                                                Seluruh Member & Non Member
-                                            </span>
-                                            fardan
-                                        </template>
-                                    </p>
-                                </div>
-                                
-                                /fardan Action Links fardan
-                                <div class="d-flex flex-column action-button-exams text-center text-md-end">
-                                    fardan Bagian Harga fardan
-                                    <div v-if="$page.props.auth.user.member_type == 2">
-                                        <tempate v-if="$page.props.setting.practice_question_sales_type == 1 && exam.user_access.length > 0">
-                                            <span class="badge bg-success" style="position:absolute; left:-10px;top:-5px; font-size:10px; z-index:2;">Enrolled</span>
-                                        </tempate>
-                                        <tempate v-if="$page.props.setting.practice_question_sales_type == 2 && exam.member_categories.length > 0 && checkMemberCategories(exam.member_categories) == true">
-                                            <span class="badge bg-success" style="position:absolute; left:-10px;top:-5px; font-size:10px; z-index:2;"></span>
-                                        </tempate>
-                                        <tempate v-if="$page.props.setting.practice_question_sales_type == 3 && (exam.user_access.length > 0 || checkMemberCategories(exam.member_categories) == true)">
-                                            <span class="badge bg-success" style="position:absolute; left:-10px;top:-5px; font-size:10px; z-index:2;">Enrolled</span>
-                                        </tempate>
-                                    </div>
-                                    <div v-if="($page.props.setting.practice_question_sales_type == 1 || $page.props.setting.practice_question_sales_type == 3) && $page.props.auth.user.member_type == 2">
-                                        <div v-if="exam.price_type == 2">
-                                            <div v-if="exam.price_before_discount == exam.price_after_discount">
-                                                <h6 class="card-price">Rp.{{ formatPrice(exam.price_after_discount) }}</h6>
-                                            </div>
-                                            <div v-else>
-                                                <h6 class="text-dark">
-                                                    <sup>
-                                                        <s>Rp.{{ formatPrice(exam.price_before_discount) }}</s>
-                                                        <span class="badge bg-danger mx-1">
-                                                            {{ formatPrice((exam.price_before_discount - exam.price_after_discount) / exam.price_before_discount * 100)}}%
-                                                        </span>
-                                                    </sup>
-                                                    <br>
-                                                    Rp.{{ formatPrice(exam.price_after_discount) }}
-                                                </h6>
-                                            </div>     
-                                        </div>                               
-                                    </div>
-                                    <div v-if="($page.props.setting.practice_question_sales_type == 1 && exam.price_type == 1) || ($page.props.setting.practice_question_sales_type == 2 && exam.member_categories.length == 0) || ($page.props.setting.practice_question_sales_type == 3 && (exam.member_categories.length == 0 || exam.price_type == 1)) ">
-                                        <span class="badge bg-warning text-dark" style="position:absolute; left:-10px;top:-5px; font-size:10px; z-index:1;">Gratis</span>
-                                    </div> 
-
-                                    fardan Bagian Tombol fardan
-                                    <div>
-                                        <div v-if="exam.exam_status == 'active'">
-                                            <template v-if="$page.props.auth.user.member_type == 2 && $page.props.setting.enable_practice_question_sales == 1">
-                                                <template v-if="$page.props.setting.practice_question_sales_type == 1">
-                                                    <template v-if="exam.user_access.length > 0 || exam.price_type == 1">
-                                                        <Link :href="`/user/categories/${exam.category_id}/lesson-categories/${exam.lesson_category_id}/lessons/${exam.lesson_id}/exams/${exam.id}`" class="btn btn-sm btn-primary me-1">Kerjakan</Link>
-                                                    </template>
-                                                    <template v-else>
-                                                        <Link class="btn btn-sm btn-danger me-1" :href="`/user/transactions/exam/${exam.id}/buy`">Beli</Link>
-                                                    </template>
-                                                </template>
-
-                                                <template v-if="$page.props.setting.practice_question_sales_type == 2">
-                                                    <template v-if="checkMemberCategories(exam.member_categories) == true">
-                                                        <Link :href="`/user/categories/${exam.category_id}/lesson-categories/${exam.lesson_category_id}/lessons/${exam.lesson_id}/exams/${exam.id}`" class="btn btn-sm btn-primary me-1">Kerjakan</Link>
-                                                    </template>
-                                                    <template v-else>
-                                                        <Link :href="`/user/vouchers?category_id=${exam.category_id}`" class="btn btn-sm btn-success">
-                                                            <span v-if="exam.member_categories.length == 1">Upgrade Ke {{ exam.member_categories[0] ? exam.member_categories[0].name : '' }}</span>
-                                                            <span v-else>Upgrade Member</span>
-                                                        </Link>
-                                                    </template>
-                                                </template>
-
-                                                <template v-if="$page.props.setting.practice_question_sales_type == 3">
-                                                    <template v-if="exam.user_access.length > 0 && checkMemberCategories(exam.member_categories) == true">
-                                                        <Link :href="`/user/categories/${exam.category_id}/lesson-categories/${exam.lesson_category_id}/lessons/${exam.lesson_id}/exams/${exam.id}`" class="btn btn-sm btn-primary me-1">Kerjakan</Link>
-                                                    </template>
-                                                    <template v-if="(exam.user_access.length == 0  || checkMemberCategories(exam.member_categories) == false) && (exam.user_access.length > 0 || checkMemberCategories(exam.member_categories) == true || exam.price_type == 1)">
-                                                        <Link :href="`/user/categories/${exam.category_id}/lesson-categories/${exam.lesson_category_id}/lessons/${exam.lesson_id}/exams/${exam.id}`" class="btn btn-sm btn-primary me-1">Kerjakan</Link>
-                                                    </template>
-                                                    <template v-if="exam.user_access.length == 0 && exam.price_type == 2">
-                                                        <Link class="btn btn-sm btn-danger me-1" :href="`/user/transactions/exam/${exam.id}/buy`">Beli</Link>
-                                                    </template>
-                                                    <template v-if="checkMemberCategories(exam.member_categories) == false">
-                                                        <Link :href="`/user/vouchers?category_id=${exam.category_id}`" class="btn btn-sm btn-success">
-                                                            <span v-if="exam.member_categories.length == 1">Upgrade Ke {{ exam.member_categories[0] ? exam.member_categories[0].name : '' }}</span>
-                                                            <span v-else>Upgrade Member</span>
-                                                        </Link>
-                                                    </template>
-                                                </template>
-                                            </template>
-                                            <template v-else>
-                                                <Link :href="`/user/categories/${exam.category_id}/lesson-categories/${exam.lesson_category_id}/lessons/${exam.lesson_id}/exams/${exam.id}`" class="btn btn-sm btn-primary me-1">Kerjakan</Link>
-                                            </template>
-                                        </div>
-                                        <template v-else>
-                                            <span class="badge" :class="{ 'bg-danger': exam.exam_status == 'inactive', 'bg-warning': exam.exam_status === 'inprogress'}">
-                                                {{ exam.exam_status === 'inactive' ? 'Inactive' : 'In Progress' }}
-                                            </span>
-                                            <template v-if="exam.exam_status == 'inprogress' && exam.release_date"> 
-                                                <br>
-                                                <span class="badge bg-success">Rilis {{ formatDateWithTimeHourMinute(exam.release_date) }}</span>
-                                            </template>
-                                        </template>
-                                    </div>
-
-                                </div>
-                            </div>
-                        </div>
-                        <div v-else class="list-group-item list-group-item-action order">
-                            <h6 class="text-center">Tryout Tidak Tersedia</h6>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            -->
-            <!--EDIT FARDAN-->
-
-
-            <div class="row mb-3" v-if="exams.data.length">
-                <div class="col-lg-12">
-                    <div class="d-flex justify-content-center" style="min-height: 0vh;">
-                        <Pagination :links="exams.links"/>
-                    </div>
-                </div>
-            </div>
-            <!--end row-->
+      <!-- Breadcrumb modern -->
+      <div class="breadcrumb-wrap">
+        <div class="left">
+          <span class="title">Latihan Soal</span>
+          <nav aria-label="breadcrumb">
+            <ol class="breadcrumb mb-0 p-0">
+              <li class="breadcrumb-item">
+                <a href="/user/dashboard" class="home" aria-label="Dashboard">
+                  <i class="bx bx-home-alt"></i>
+                </a>
+              </li>
+              <li class="breadcrumb-item active" aria-current="page">Soal</li>
+            </ol>
+          </nav>
         </div>
+        <div class="right">
+          <Link
+            :href="`/user/categories/${categoryId}/lesson-categories/${lessonCategoryId}/lessons`"
+            class="btn btn-primary btn-sm back-btn"
+          >
+            <i class="bx bx-left-arrow-alt"></i> Kembali
+          </Link>
+        </div>
+      </div>
+
+      <hr class="divider"/>
+
+      <!-- Search / Filter (modern) -->
+      <div class="card search-card">
+        <div class="card-body p-3">
+          <div class="input-group search-stack">
+            <span class="input-icon">
+              <i class="bx bx-search"></i>
+            </span>
+            <input
+              type="text"
+              v-model="form.search"
+              class="form-control form-control-sm search-input"
+              placeholder="Cari judul latihan…"
+            />
+
+            <button
+              @click.prevent="handleSearch"
+              class="btn btn-primary btn-sm search-btn"
+              title="Filter"
+            >
+              <i class="bx bx-filter-alt"></i>
+            </button>
+
+            <Link
+              :href="`/user/categories/${categoryId}/lesson-categories/${lessonCategoryId}/lessons/${lessonId}/exams`"
+              class="btn btn-outline-secondary btn-sm reset-btn"
+              title="Reset"
+            >
+              <i class="bx bx-refresh"></i>
+            </Link>
+          </div>
+        </div>
+      </div>
+
+      <!-- Grid Soal -->
+      <div class="card list-shell">
+        <div class="card-body">
+          <div class="row g-3 g-md-4">
+
+            <!-- Tile Soal -->
+            <div
+              v-for="(exam, index) in exams.data"
+              :key="index"
+              class="col-12 col-md-6 col-lg-4 col-xxl-3"
+            >
+              <div class="exam-tile">
+                <div class="tile-head">
+                  <span class="pill">Latihan</span>
+                </div>
+
+                <h6 class="tile-title clamp-2">{{ exam.title }}</h6>
+
+                <div class="tile-meta">
+                  <div class="meta-left">
+                    <i class="bx bx-time"></i>
+                    <span>Siap dikerjakan</span>
+                  </div>
+
+                  <div class="meta-right">
+                    <!-- Akses berdasarkan practice_question_sales_type == 2 -->
+                    <template v-if="$page.props.setting.practice_question_sales_type == 2">
+                      <template v-if="checkMemberCategories(exam.member_categories)">
+                        <Link
+                          :href="`/user/categories/${exam.category_id}/lesson-categories/${exam.lesson_category_id}/lessons/${exam.lesson_id}/exams/${exam.id}`"
+                          class="btn btn-kerjakan"
+                        >
+                          Kerjakan <i class="bx bx-right-arrow-alt"></i>
+                        </Link>
+                      </template>
+                      <template v-else>
+                        <Link
+                          :href="`/user/vouchers?category_id=${exam.category_id}`"
+                          class="btn btn-upgrade"
+                        >
+                          <span v-if="exam.member_categories && exam.member_categories.length === 1">
+                            Upgrade {{ exam.member_categories[0]?.name || '' }}
+                          </span>
+                          <span v-else>Upgrade</span>
+                          <i class="bx bx-trending-up"></i>
+                        </Link>
+                      </template>
+                    </template>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Empty state -->
+            <div v-if="!exams.data.length" class="col-12">
+              <div class="empty-card text-center">
+                <div class="empty-icon"><i class="bx bx-book-open"></i></div>
+                <h6 class="mb-1">Latihan Tidak Tersedia</h6>
+                <p class="text-muted mb-0">Coba kata kunci lain atau cek kembali nanti.</p>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+      <!-- Pagination -->
+      <div class="row mb-3" v-if="exams.data.length">
+        <div class="col-lg-12">
+          <div class="d-flex justify-content-center">
+            <Pagination :links="exams.links"/>
+          </div>
+        </div>
+      </div>
+
     </div>
-    <!--end page wrapper -->
+  </div>
+  <!--end page wrapper -->
 </template>
 
 <script>
-    //import layout admin
-    import LayoutUser from '../../../../Layouts/Layout.vue';
+import LayoutUser from '../../../../Layouts/Layout.vue';
+import Pagination from '../../../../Components/Pagination.vue';
+import { Link, Head } from '@inertiajs/inertia-vue3';
+import { Inertia } from '@inertiajs/inertia';
+import Swal from 'sweetalert2';
+import { reactive, ref } from 'vue';
 
-    //import component pagination
-    import Pagination from '../../../../Components/Pagination.vue';
+export default {
+  layout: LayoutUser,
+  components: { Link, Head, Pagination },
+  props: {
+    exams: Object,
+    categoryId: Object,
+    lessonCategoryId: Object,
+    lessonId: Object,
+    userMemberCategories: Object,
+    subCategories: Object,
+    session: Object,
+  },
+  setup(props) {
+    const form = reactive({
+      search: ref("" || (new URL(document.location)).searchParams.get('search')),
+      sub_category_id: ref((new URL(document.location)).searchParams.get('sub_category_id') || ''),
+    });
 
-    // import Link
-    import { Link } from '@inertiajs/inertia-vue3';
+    const handleSearch = () => {
+      Inertia.get(
+        `/user/categories/${props.categoryId}/lesson-categories/${props.lessonCategoryId}/lessons/${props.lessonId}/exams`,
+        { search: form.search, sub_category_id: form.sub_category_id }
+      );
+    };
 
-    import { Inertia } from '@inertiajs/inertia';
-
-    // import Head from Inertia
-    import {
-        Head
-    } from '@inertiajs/inertia-vue3';
-
-    //import sweet alert2
-    import Swal from 'sweetalert2';
-
-    //import reactive
-    import { reactive } from 'vue';
-
-    //import ref from vue
-    import { ref } from 'vue';
-
-    export default {
-
-        // layout
-        layout: LayoutUser,
-
-        // register components
-        components: {
-            Link,
-            Head,
-            Pagination
-        },
-
-        // props
-        props: {
-            exams: Object,
-            categoryId: Object,
-            lessonCategoryId: Object,
-            lessonId: Object,
-            userMemberCategories: Object,
-            subCategories: Object,
-            session: Object,
-        },
-        setup(props) {
-
-            const form = reactive({
-                search: ref("" || (new URL(document.location)).searchParams.get('search')),
-                sub_category_id: ref((new URL(document.location)).searchParams.get('sub_category_id') || ''),
-            });
-
-            const handleSearch = () => {
-                Inertia.get(`/user/categories/${props.categoryId}/lesson-categories/${props.lessonCategoryId}/lessons/${props.lessonId}/exams`, {
-                    search: form.search,
-                    sub_category_id: form.sub_category_id,
-                })
-            }
-
-            if (props.session && props.session.success) {
-                Swal.fire({
-                    title: "Sukses",
-                    text: props.session.success,
-                    icon: "success",
-                })
-            }
-
-            if (props.session && props.session.error) {
-                Swal.fire({
-                    title: "Peringatan",
-                    text: props.session.error,
-                    icon: "error",
-                    showCancelButton: true,
-                    confirmButtonColor: '#3085d6',
-                    cancelButtonColor: '#d33',
-                    confirmButtonText: 'Top Up Saldo',
-                    cancelButtonText: 'Tidak'
-                })
-                .then((result) => {
-                    if (result.isConfirmed) {
-                        Inertia.get('/user/account-balances');
-                    }
-                })
-            }
-
-            const checkMemberCategories = (categories) => {
-                    categories = categories || []; // pastikan selalu array
-                    const userCategories = props.userMemberCategories || [];
-
-                    if (categories.length > 0) {
-                        const categoryIds = categories.map(category => String(category.id));
-                        return userCategories.some(entry => categoryIds.includes(String(entry.member_category_id)));
-                    } else {
-                        return true; // tetap sesuai logika lama
-                    }
-                };
-
-
-            return {
-                form, 
-                handleSearch,
-                checkMemberCategories
-            }
-        },
-        methods: {
-            formatPrice(value) {
-                let val = (value/1).toFixed().replace('.', ',')
-                return val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".")
-            }
-        }
+    if (props.session && props.session.success) {
+      Swal.fire({ title: "Sukses", text: props.session.success, icon: "success" });
     }
+
+    if (props.session && props.session.error) {
+      Swal.fire({
+        title: "Peringatan",
+        text: props.session.error,
+        icon: "error",
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Top Up Saldo',
+        cancelButtonText: 'Tidak'
+      }).then((result) => {
+        if (result.isConfirmed) Inertia.get('/user/account-balances');
+      });
+    }
+
+    const checkMemberCategories = (categories) => {
+      const list = categories || [];
+      const userCats = props.userMemberCategories || [];
+      if (!list.length) return true;
+      const ids = list.map(c => String(c.id));
+      return userCats.some(entry => ids.includes(String(entry.member_category_id)));
+    };
+
+    return { form, handleSearch, checkMemberCategories };
+  },
+  methods: {
+    formatPrice(value) {
+      let val = (value/1).toFixed().replace('.', ',');
+      return val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+    }
+  }
+}
 </script>
 
-<!--edit fardan-->
 <style>
-.exam-title {
-    font-size: 16px;
-    font-weight: 600;
-    color: #333;
+/* ====== Breadcrumb modern ====== */
+.breadcrumb-wrap{
+  display:flex; align-items:center; justify-content:space-between;
+  gap:1rem; flex-wrap:wrap; margin-bottom:1rem;
+}
+.breadcrumb-wrap .title{
+  font-weight:800; letter-spacing:.2px; font-size:1.06rem;
+}
+.breadcrumb-wrap .left{display:flex; align-items:center; gap:14px;}
+.breadcrumb .breadcrumb-item + .breadcrumb-item::before{ content:"›"; }
+.breadcrumb-wrap .home{
+  display:inline-flex; align-items:center; justify-content:center;
+  width:34px; height:34px; border-radius:10px; background:#f1f5f9; color:#0f172a;
+  transition:transform .18s ease, background .18s ease;
+}
+.breadcrumb-wrap .home:hover{ transform:translateY(-1px); background:#e2e8f0; }
+.back-btn{
+  font-weight:600; border-radius:12px;
+  box-shadow:0 6px 16px rgba(2,6,23,.08);
+  transition:transform .18s ease, box-shadow .18s ease, filter .18s ease;
+}
+.back-btn:hover{ transform:translateY(-1px); box-shadow:0 10px 24px rgba(2,6,23,.12); filter:brightness(1.02); }
+.divider{ opacity:.2; margin:.25rem 0 1.25rem; }
+
+/* ====== Search bar ====== */
+.search-card{ border:1px solid #eef2f7; border-radius:16px; box-shadow:0 8px 20px rgba(2,6,23,.04); }
+.search-stack{ gap:.5rem; align-items:center; position:relative; }
+.input-icon{
+  position:absolute; left:14px; z-index:2; pointer-events:none; color:#64748b;
+  display:flex; align-items:center; height:32px;
+}
+.input-icon i{ font-size:18px; }
+.search-input{
+  padding-left:40px !important; border-radius:12px; border:1px solid #e5e7eb;
+  height:38px;
+}
+.search-input:focus{
+  outline:none; border-color:#93c5fd; box-shadow:0 0 0 3px rgba(59,130,246,.15);
+}
+.search-btn, .reset-btn{
+  border-radius:10px; height:38px; display:inline-flex; align-items:center; gap:.35rem;
+}
+.reset-btn{ border-color:#cbd5e1; }
+
+/* ====== Shell ====== */
+.list-shell{ border:none; border-radius:16px; background:#f8fafc; }
+
+/* ====== Tile Soal ====== */
+.exam-tile{
+  height:100%;
+  border:1px solid #eef2f7; border-radius:16px; background:#fff;
+  padding:16px 16px 14px;
+  box-shadow:0 8px 22px rgba(2,6,23,.05);
+  transition:transform .18s ease, box-shadow .18s ease, border-color .18s ease;
+}
+.exam-tile:hover{
+  transform:translateY(-4px); box-shadow:0 16px 36px rgba(2,6,23,.1); border-color:#dbe3f0;
+}
+.tile-head{ display:flex; justify-content:space-between; align-items:center; margin-bottom:.35rem; }
+.pill{
+  display:inline-flex; align-items:center; height:22px; padding:0 .55rem;
+  border-radius:999px; font-size:.7rem; font-weight:800; letter-spacing:.3px;
+  background:#eef2ff; color:#4f46e5;
+}
+.tile-title{
+  font-weight:800; letter-spacing:.2px; color:#0f172a;
+  margin: 6px 0 10px;
+}
+.clamp-2{
+  overflow:hidden; display:-webkit-box; -webkit-box-orient:vertical; -webkit-line-clamp:2; line-clamp:2;
 }
 
-.exam-action .btn {
-    font-size: 14px;
-    font-weight: 500;
-    border-radius: 8px;
-    padding: 8px 20px;
-    transition: all 0.3s ease-in-out;
+.tile-meta{
+  display:flex; align-items:center; justify-content:space-between; gap:.75rem; margin-top:auto;
+}
+.meta-left{ color:#6b7280; display:inline-flex; align-items:center; gap:.45rem; font-size:.92rem; }
+.meta-left i{ font-size:1.05rem; }
+
+/* ====== Buttons ====== */
+.btn-kerjakan{
+  --c1:#3b82f6; --c2:#2563eb;
+  display:inline-flex; align-items:center; gap:.4rem;
+  border:none; color:#fff; font-weight:800; letter-spacing:.2px;
+  padding:.5rem .9rem; border-radius:999px; cursor:pointer; text-decoration:none;
+  background: linear-gradient(135deg, var(--c1) 0%, var(--c2) 100%);
+  box-shadow:0 10px 22px rgba(37,99,235,.22);
+  transition: transform .15s ease, box-shadow .2s ease, filter .15s ease;
+}
+.btn-kerjakan:hover{
+  transform:translateY(-2px); filter:brightness(1.02);
+  box-shadow:0 14px 28px rgba(37,99,235,.28);
+}
+.btn-kerjakan i{ font-size:1.05rem; }
+
+.btn-upgrade{
+  display:inline-flex; align-items:center; gap:.4rem;
+  border:1px solid #16a34a; color:#16a34a; font-weight:800; letter-spacing:.2px;
+  padding:.5rem .9rem; border-radius:999px; text-decoration:none;
+  background:#ffffff; transition: transform .15s ease, box-shadow .2s ease, background .2s ease, color .2s ease;
+  box-shadow:0 0 0 rgba(0,0,0,0);
+}
+.btn-upgrade:hover{
+  transform:translateY(-2px);
+  background:#16a34a; color:#fff; box-shadow:0 12px 24px rgba(22,163,74,.22);
+}
+.btn-upgrade i{ font-size:1.05rem; }
+
+/* ====== Empty state ====== */
+.empty-card{
+  border:1px dashed #e5e7eb; border-radius:16px;
+  background:linear-gradient(180deg, #fff 0%, #fafbfd 100%);
+  box-shadow:0 8px 20px rgba(2,6,23,.04);
+  padding:28px 16px;
+}
+.empty-icon{
+  width:64px; height:64px; margin:0 auto 12px; border-radius:16px;
+  display:grid; place-items:center; background:#eef2ff; color:#4f46e5; font-size:30px;
 }
 
-.exam-action .btn-primary {
-    background-color: #007bff;
-    border: none;
-    color: white;
-}
-
-.exam-action .btn-primary:hover {
-    background-color: #0056b3;
-}
-
-.exam-action .btn-outline-success {
-    border-color: #28a745;
-    color: #28a745;
-}
-
-.exam-action .btn-outline-success:hover {
-    background-color: #28a745;
-    color: white;
+/* ====== Responsif ====== */
+@media (max-width: 576px){
+  .search-stack{ gap:.4rem; }
+  .btn-kerjakan, .btn-upgrade{ padding:.45rem .8rem; }
 }
 </style>
-<!--edit fardan-->
-
-<!--
-<style>
-   .action-button-exams {
-        display: flex;
-        flex-direction: column;
-        align-items: flex-end; /* Default alignment for larger screens */
-    }
-
-    @media (max-width: 740px) {
-        .list-group-item {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-
-        .list-group-item .flex-grow-1 {
-            text-align: center;
-            margin-bottom: 10px;
-        }
-
-        .action-button-exams {
-            align-items: center;
-            text-align: center;
-            margin: 0 auto; /* Ensure the container is centered */
-        }
-
-        .action-button-exams h6,
-        .action-button-exams .btn,
-        .action-button-exams .btn-danger {
-            margin: 5px 0; /* Ensure spacing around elements */
-        }
-    }
-</style>
--->

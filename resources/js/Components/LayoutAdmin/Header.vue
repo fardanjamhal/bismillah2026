@@ -7,7 +7,9 @@
                     <i class='bx bx-menu'></i><span style="font-size:14pt;position: absolute;margin-top:6px;">Menu</span>
                 </div>
                 <div class="top-menu ms-auto">
+                    <!--
                     <a v-if="$page.props.auth.user.level == 2" target="_blank" :href="`https://wa.me/${$page.props.setting.whatsapp_number}`" class="btn btn-outline-success btn-sm" style="background:#fff; color:#15ca20;"><i class='lni lni-whatsapp' style="font-size:17px; margin-top:-20px;"></i>WA Support</a>
+                    -->
                 </div>
                 <div class="user-box dropdown ">
                     <a class="d-flex align-items-center nav-link dropdown-toggle dropdown-toggle-nocaret" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">

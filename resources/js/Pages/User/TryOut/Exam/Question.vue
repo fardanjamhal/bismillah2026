@@ -726,6 +726,7 @@
                 margin:2px;
             }
         }
+        
     .modal-header {
         text-align: center;
     }

@@ -212,7 +212,7 @@
                     {{ errors.contact }}
                   </div>
                 </div>
-
+                <br>
                 <!-- Submit -->
                 <button
                   type="submit"
@@ -241,24 +241,47 @@
                   }}
                 </button>
 
-                <p class="text-center small" style="margin-top:.75rem; margin-bottom:0;">
-                    Kontak tidak terdaftar?
-                    <a
-                        :href="`https://wa.me/${$page?.props?.setting?.whatsapp_number || ''}?text=${encodeURIComponent(`*[FORGOT PASSWORD - ${$page?.props?.setting?.app_name || 'Aplikasi'}]*\n\nHallo, Admin saya sudah daftar dan ingin reset password, ketika konfirmasi kontak tidak terdaftar, berikut data saya untuk perbaikan:\n\nNama:\nEmail:\nNomor Handphone Aktif:\n\nTerima kasih.`)}`"
-                        target="_blank"
-                        class="text-decoration-none"
-                        style="
-                        color:#2563eb;
-                        font-weight:600;
-                        transition:color 0.25s ease;
-                        "
-                        onmouseover="this.style.color='#1d4ed8'"
-                        onmouseout="this.style.color='#2563eb'"
-                    >
-                        Klik di sini
-                    </a>
-                    untuk pemulihan data.
-                    </p>
+                  <div
+                  class="text-center small"
+                  style="
+                    margin-top:.9rem; margin-bottom:0;
+                    display:flex; justify-content:center; align-items:center;
+                    gap:.55rem; flex-wrap:wrap;
+                    font-family:Inter, system-ui, -apple-system, Segoe UI, Roboto, 'Helvetica Neue', Arial, 'Noto Sans', 'Liberation Sans', sans-serif;
+                    color:#4b5563;
+                  "
+                >
+                  <span style="font-size:.9rem;">Kontak tidak terdaftar?</span>
+
+                  <a
+                    :href="`https://wa.me/${$page?.props?.setting?.whatsapp_number || ''}?text=${encodeURIComponent(`*[FORGOT PASSWORD - ${$page?.props?.setting?.app_name || 'Aplikasi'}]*\n\nHallo, Admin saya sudah daftar dan ingin reset password, ketika konfirmasi kontak tidak terdaftar, berikut data saya untuk perbaikan:\n\nNama:\nEmail:\nNomor Handphone Aktif:\n\nTerima kasih.`)}`"
+                    target="_blank"
+                    rel="noopener"
+                    aria-label="Hubungi Admin via WhatsApp untuk pemulihan data"
+                    style="
+                      display:inline-flex; align-items:center; justify-content:center; gap:.45rem;
+                      padding:.45rem 1rem;
+                      border:none; border-radius:9999px;
+                      background:linear-gradient(135deg,#22c55e 0%, #16a34a 100%);
+                      color:#ffffff; font-weight:700; font-size:.9rem; text-decoration:none;
+                      box-shadow:0 4px 12px rgba(34,197,94,.35);
+                      transition:transform .25s ease, box-shadow .25s ease, filter .25s ease;
+                      cursor:pointer; white-space:nowrap;
+                    "
+                    onmouseover="this.style.transform='translateY(-2px) scale(1.03)'; this.style.boxShadow='0 8px 22px rgba(22,163,74,.45)'; this.style.filter='brightness(1.05)';"
+                    onmouseout="this.style.transform='translateY(0) scale(1)'; this.style.boxShadow='0 4px 12px rgba(34,197,94,.35)'; this.style.filter='none';"
+                  >
+                    <!-- Logo WhatsApp (SVG) -->
+                    <svg xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                      <path d="M20.5 12a8.5 8.5 0 1 1-15.08 5.04L4 21l3.96-1.38A8.5 8.5 0 1 1 20.5 12z"/>
+                      <path d="M8.8 9.6c0 .3.06.6.19.88.42.95 1.34 2.14 2.68 3.06 1.33.92 2.38 1.17 3.2.97.23-.06.44-.18.6-.35l.48-.5c.2-.2.2-.52 0-.72l-1.06-1.06a.54.54 0 0 0-.76 0l-.34.34c-.18.18-.45.24-.69.15-.43-.16-1.05-.45-1.73-.93-.67-.47-1.14-.93-1.41-1.3a.64.64 0 0 1 .06-.79l.3-.36a.54.54 0 0 0 0-.76L10 7.6a.51.51 0 0 0-.72 0l-.52.54c-.37.39-.56.9-.56 1.46z"/>
+                    </svg>
+                    <span>WhatsApp Admin</span>
+                  </a>
+
+                  <span style="font-size:.9rem;">untuk pemulihan data.</span>
+                </div>
+
               </form>
             </div>
           </div>
