@@ -340,8 +340,8 @@
 
                 <!-- Referral (read-only) -->
                 <div class="mb-2" v-if="$page?.props?.setting?.enable_affiliate_feature == 1 && referrer && referrer.referral_link">
-                  <label class="form-label" style="font-size:.9rem; margin-bottom:.25rem;">Kode Referral</label>
-                  <input type="text" class="form-control" :value="referrer.referral_link.referral_code" readonly :style="inputStyle">
+                  <!--<label class="form-label" style="font-size:.9rem; margin-bottom:.25rem;">Kode Referral</label>-->
+                  <input type="hidden" class="form-control" :value="referrer.referral_link.referral_code" readonly :style="inputStyle">
                 </div>
 
                 <!-- Submit -->

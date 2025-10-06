@@ -147,7 +147,9 @@
                         </table>
                     </div>
 
-                    <Pagination :links="questionTitles.links" align="end" />
+                    <div class="d-flex justify-content-center align-items-center" style="height: 100px;">
+                        <Pagination :links="questionTitles.links" align="end" />
+                    </div>
 
                 </div>
             </div>
