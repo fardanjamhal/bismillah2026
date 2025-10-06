@@ -1,0 +1,1 @@
+import{v as o}from"./app-73924097.js";import{_ as e}from"./_plugin-vue_export-helper-c27b6911.js";const r={},s={class:"wrapper"};function c(t,n,a,p,_,d){return o.openBlock(),o.createElementBlock("div",s,[o.renderSlot(t.$slots,"default")])}const l=e(r,[["render",c]]);export{l as L};
