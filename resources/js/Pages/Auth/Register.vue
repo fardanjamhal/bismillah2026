@@ -343,7 +343,7 @@
                   <!--<label class="form-label" style="font-size:.9rem; margin-bottom:.25rem;">Kode Referral</label>-->
                   <input type="hidden" class="form-control" :value="referrer.referral_link.referral_code" readonly :style="inputStyle">
                 </div>
-
+                <br>
                 <!-- Submit -->
                 <button
                   type="submit"
