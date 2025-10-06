@@ -70,18 +70,49 @@
                             <div>
                                 <div v-html="questionLists[indexPage]['question']" class="prevent-select clearfix ck-content"></div>
                             </div>
+                            <br>
                             <table>
                                 <tbody v-if="exam.type_option == 1">
                                     <tr v-for="(answer, index) in (questionLists[indexPage]['answer_order'].split(','))" :key="index">
+
                                         <span>
-                                            <td width="50" style="padding: 10px;">
-                                                <button v-if="getMyAnswer(questionLists[indexPage]['question_id']).includes(Number(answer))"  @click="submitAnswer(questionLists[indexPage]['question_id'], answer)" class="btn btn-success text-white">{{ options[index] }}</button>
-                                                <button v-else @click="submitAnswer(questionLists[indexPage]['question_id'], answer)" class="btn btn-outline-primary w-100 no-click-effect">{{ options[index] }}</button>
-                                            </td>
-                                            <td style="padding: 10px;">
-                                                <p class="prevent-select ck-content" v-if="exam.show_answer == 1" v-html="questionLists[indexPage]['option_' + answer]"></p>
-                                            </td>
+                                        <td width="50" style="padding: 10px;">
+                                            <button
+                                                v-if="getMyAnswer(questionLists[indexPage]['question_id']).includes(Number(answer))"
+                                                @click="submitAnswer(questionLists[indexPage]['question_id'], answer)"
+                                                class="btn btn-success text-white"
+                                            >
+                                                {{ options[index] }}
+                                            </button>
+                                            <button
+                                                v-else
+                                                @click="submitAnswer(questionLists[indexPage]['question_id'], answer)"
+                                                class="btn btn-outline-primary w-100 no-click-effect"
+                                            >
+                                                {{ options[index] }}
+                                            </button>
+                                        </td>
+
+                                        <td style="padding: 10px;">
+                                            <p
+                                                class="prevent-select ck-content"
+                                                v-if="exam.show_answer == 1"
+                                                v-html="questionLists[indexPage]['option_' + answer]"
+                                                
+                                                @click="submitAnswer(questionLists[indexPage]['question_id'], answer)"
+                                                
+                                                :class="getMyAnswer(questionLists[indexPage]['question_id']).includes(Number(answer)) ? 'text-success fw-bold' : ''"
+                                                
+                                                style="cursor: pointer; transition: color 0.2s;"
+                                                
+                                                @mouseover="event.currentTarget.style.color='#0d6efd'"
+                                                
+                                                @mouseleave="event.currentTarget.style.color=getMyAnswer(questionLists[indexPage]['question_id']).includes(Number(answer)) ? '#198754' : 'inherit'"
+                                            ></p>
+                                        </td>
                                         </span>
+                                    
+                                        
                                     </tr>
                                 </tbody>
                                 <tbody v-if="exam.type_option == 2">
@@ -111,7 +142,7 @@
                         </span>
                     </div>
                     <div class="card-footer">
-                        <div class="d-flex justify-content-between">
+                        <div class="d-flex justify-content-center align-items-center">
                             <div class="text-start">
                                 <div  v-if="exam.show_prev_next_button == 1">
                                     <button v-if="indexPage > 0" @click="prevPage()" type="button" class="btn btn-primary me-3">Sebelumnya</button>
@@ -136,7 +167,7 @@
             <div v-if="exam.show_question_number_navigation == 1" class="col-md-12 col-sm-12 col-xs-12" :class="{ 'col-lg-4': exam.show_question_number_navigation == 1}">
                 <div class="card">
                     <div class="card-header text-white bg-primary">
-                        <div class="d-flex justify-content-between">
+                        <div class="d-flex justify-content-center align-items-center">
                             <div>
                                 <h5 class="mb-0 text-white">Navigasi Soal</h5>
                             </div>

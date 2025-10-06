@@ -185,7 +185,13 @@
                         </table>
                     </div>
 
-                    <Pagination :links="users.links" align="end" />
+                    <div class="d-flex justify-content-center">
+                        <Pagination 
+                            :links="users.links" 
+                            align="center" 
+                            class="mb-0" 
+                            />
+                    </div>
 
                 </div>
             </div>

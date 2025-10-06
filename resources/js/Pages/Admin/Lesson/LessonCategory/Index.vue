@@ -42,7 +42,9 @@
                             <Link href="/admin/lesson-categories/create" class="btn btn-primary btn-sm mt-2 mt-lg-0"><i class="bx bxs-plus-square"></i> Tambah Kategori Mata Pelajaran</Link>
                         </div>
                     </div>
-                    <table class="table mb-0" style="font-size:10pt;">
+
+                    <div class="table-responsive">
+                        <table class="table mb-0" style="font-size:10pt;">
                         <thead class="table-light">
                             <tr>
                                 <th>No</th>
@@ -94,8 +96,15 @@
                             </tr>
                         </tbody>
                     </table>
+                    </div>
+                    
 
-                    <Pagination :links="lessonCategories.links" align="end" />
+                    <div class="d-flex justify-content-center mt-3">
+                        <Pagination 
+                            :links="lessonCategories.links" 
+                            align="center" 
+                        />
+                    </div>
 
                 </div>
             </div>

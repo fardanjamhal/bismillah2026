@@ -45,6 +45,7 @@
 
             <!--EDIT FARDAN-->
 
+            <!--
             <div class="card mb-0">
                 <div class="card-body p-3">
                     <div class="list-group">
@@ -55,12 +56,12 @@
                             
                             <div class="exam-container">
                                 
-                                <!-- Kolom Kiri: Judul -->
+                                
                                 <div class="exam-info">
                                     <h6 class="text-dark fw-semibold">{{ exam.title }}</h6>
                                 </div>
 
-                                <!-- Kolom Kanan: Tombol -->
+                                
                                 <div class="exam-action">
                                     <template v-if="checkMemberCategories(exam.member_categories)">
                                         <Link :href="`/user/exam-groups/${lessonCategory?.category_id}/lesson-categories/${lessonCategory?.id}/exams/${exam?.id}`" 
@@ -85,7 +86,55 @@
                     </div>
                 </div>
             </div>
+            -->
 
+
+            <div class="card mb-0" style="background-color: #f8f9fc; border: none; border-radius: 16px;">
+            <div class="card-body">
+                <div class="row g-3">
+
+                <!-- Kotak Tryout -->
+                <div v-for="(exam, index) in examGroups.data" :key="index" class="col-6 col-md-4 col-lg-2">
+                    <div class="text-center p-3 h-100 rounded-4 shadow-sm"
+                        style="background-color: #ffffff; border: 1px solid #e0e6ed; transition: all 0.25s ease; cursor: pointer;"
+                        @mouseover="event.currentTarget.style.transform='translateY(-4px)'; event.currentTarget.style.boxShadow='0 6px 16px rgba(0,0,0,0.1)'"
+                        @mouseleave="event.currentTarget.style.transform='none'; event.currentTarget.style.boxShadow='0 2px 6px rgba(0,0,0,0.05)'">
+
+                    <h6 class="fw-bold mb-2" style="color: #1f1f1f; font-size: 1rem;">{{ exam.title }}</h6>
+                    
+                    <div class="mt-auto">
+                        <template v-if="checkMemberCategories(exam.member_categories)">
+                        <Link
+                            :href="`/user/exam-groups/${lessonCategory?.category_id}/lesson-categories/${lessonCategory?.id}/exams/${exam?.id}`"
+                            class="fw-semibold px-3 py-1 mt-2 d-inline-block"
+                            style="background-color: #0d6efd; color: #fff; border-radius: 30px; text-decoration: none; transition: background-color 0.2s;"
+                            @mouseover="event.currentTarget.style.backgroundColor='#0b5ed7'"
+                            @mouseleave="event.currentTarget.style.backgroundColor='#0d6efd'">
+                            Kerjakan
+                        </Link>
+                        </template>
+                        <template v-else>
+                        <Link
+                            :href="`/user/vouchers?category_id=${exam?.category_id}`"
+                            class="fw-semibold px-3 py-1 mt-2 d-inline-block"
+                            style="border: 1px solid #198754; color: #198754; border-radius: 30px; text-decoration: none; transition: all 0.2s;"
+                            @mouseover="event.currentTarget.style.backgroundColor='#198754'; event.currentTarget.style.color='#fff'"
+                            @mouseleave="event.currentTarget.style.backgroundColor='transparent'; event.currentTarget.style.color='#198754'">
+                            Upgrade
+                        </Link>
+                        </template>
+                    </div>
+                    </div>
+                </div>
+
+                <!-- Jika tidak ada data -->
+                <div v-if="!examGroups.data.length" class="col-12 text-center mt-3">
+                    <h6 style="color:#555;">Tryout Tidak Tersedia</h6>
+                </div>
+
+                </div>
+            </div>
+            </div>
 
 
             <!--

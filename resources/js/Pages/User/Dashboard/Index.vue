@@ -62,12 +62,16 @@
             </div>
             -->
 
-            <div class="card radius-10 border-start border-0 border-3 border-info">
+            <div>
                 <div class="card-body">
+                    <!--
                     <h6 class="mb-3">Informasi Kategori Peminatan</h6>
+                    -->
                     <div class="row">
                         <div class="col-lg-4 col-md-6 col-sm-12 mb-4" v-for="(totalDataInCategory, index) in totalDataInCategories" :key="index">
-                            <div class="card radius-10 overflow-hidden mb-0 shadow-none border border-2">
+                            <div>
+                                
+                                <!--
                                 <div class="card-header">
                                     <div class="d-flex align-items-center">
                                         <div>
@@ -79,6 +83,9 @@
                                         </div>
                                     </div>
                                 </div>
+                                -->
+                                
+                                <!--
                                 <div class="card-body">
                                     <table class="table table-sm mb-0">
                                         <tbody>
@@ -102,18 +109,179 @@
                                                 <td>{{ totalDataInCategory.video_module_count }}</td>
                                                 <td><Link class="badge bg-info" href="/user/video-modules">Lihat</Link></td>
                                             </tr>
+
                                             <tr v-if="($page.props.auth.user.member_type == 1 && $page.props.setting.free_member_access.some(item => item.code === 'course')) || ($page.props.auth.user.member_type == 2 && $page.props.setting.paid_member_access.some(item => item.code === 'course'))">
                                                 <td><i class='bx bx-chalkboard text-success font-20'></i> Course</td>
                                                 <td>{{ totalDataInCategory.course_count }}</td>
                                                 <td><Link class="badge bg-info" href="/user/courses">Lihat</Link></td>
                                             </tr>
+                                           
                                         </tbody>
                                     </table>
                                 </div>
+                                -->
+
                             </div>
                         </div>
                     </div>
                 </div>
+
+
+    
+
+                <div class="card-body">
+                    <div class="row g-4">
+                        <template v-for="(category, index) in totalDataInCategories.slice(0, 4)" :key="index">
+                            
+                            <div class="col-12">
+                                <div class="row g-4">
+                                    
+                                    <!-- ✅ TRYOUT -->
+                                <div class="col-lg-3 col-md-6 col-sm-12 mb-4"
+                                    v-if="($page.props.auth.user.member_type == 1 && $page.props.setting.free_member_access.some(item => item.code === 'tryout')) 
+                                    || ($page.props.auth.user.member_type == 2 && $page.props.setting.paid_member_access.some(item => item.code === 'tryout'))">
+
+                                    <div class="card rounded-4 h-100"
+                                        style="background: linear-gradient(135deg, #6f42c1, #8a5bda); color: #fff; border: none; transition: all 0.3s; cursor: pointer;"
+                                        @mouseover="event.currentTarget.style.transform='translateY(-5px)'; event.currentTarget.style.boxShadow='0 8px 20px rgba(111,66,193,0.4)'"
+                                        @mouseleave="event.currentTarget.style.transform='translateY(0)'; event.currentTarget.style.boxShadow='none'">
+                                        
+                                        <div class="card-body">
+                                            <div class="d-flex align-items-center mb-2">
+                                                <a :href="`/user/exam-groups/${category.id}/lesson-categories`">
+                                                <div style="width: 55px; height: 55px; display:flex; justify-content:center; align-items:center; margin-right:15px;
+                                                            border-radius:50%; background:rgba(255,255,255,0.25);">
+                                                    <i class="bx bx-edit" style="font-size:1.6rem; color:#fff;"></i>
+                                                </div>
+                                                </a>
+                                                <div class="flex-grow-1 text-end">
+                                                    <h4 class="my-1 fw-bolder" style="font-size:2rem; color:white;">{{ category.exam_group_count }}</h4>
+                                                    <p class="mb-0" style="opacity:0.9;">Tryout</p>
+                                                </div>
+                                            </div>
+                                            <div class="mt-3 pt-2 text-end" style="border-top:1px dashed rgba(255,255,255,0.3);">
+                                                <Link :href="`/user/exam-groups/${category.id}/lesson-categories`" 
+                                                    class="fw-bold text-decoration-none"
+                                                    style="color:#fff; font-size:0.9rem;">
+                                                    Lihat Tryout <i class="bx bx-right-arrow-alt"></i>
+                                                </Link>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- ✅ LATIHAN SOAL -->
+                                <div class="col-lg-3 col-md-6 col-sm-12 mb-4"
+                                    v-if="($page.props.auth.user.member_type == 1 && $page.props.setting.free_member_access.some(item => item.code === 'question_practice')) 
+                                    || ($page.props.auth.user.member_type == 2 && $page.props.setting.paid_member_access.some(item => item.code === 'question_practice'))">
+
+                                    <div class="card rounded-4 h-100"
+                                        style="background: linear-gradient(135deg, #20c997, #38e0b0); color:#fff; border:none; transition:all 0.3s; cursor:pointer;"
+                                        @mouseover="event.currentTarget.style.transform='translateY(-5px)'; event.currentTarget.style.boxShadow='0 8px 20px rgba(32,201,151,0.4)'"
+                                        @mouseleave="event.currentTarget.style.transform='translateY(0)'; event.currentTarget.style.boxShadow='none'">
+
+                                        <div class="card-body">
+                                            <div class="d-flex align-items-center mb-2">
+                                                <a :href="`/user/categories/${category.id}/lesson-categories`">
+                                                <div style="width:55px; height:55px; display:flex; justify-content:center; align-items:center; margin-right:15px;
+                                                            border-radius:50%; background:rgba(255,255,255,0.25);">
+                                                    <i class="bx bx-book" style="font-size:1.6rem; color:#fff;"></i>
+                                                </div>
+                                                </a>
+                                                <div class="flex-grow-1 text-end">
+                                                    <h4 class="my-1 fw-bolder" style="font-size:2rem; color:white;">{{ category.exam_count }}</h4>
+                                                    <p class="mb-0" style="opacity:0.9;">Latihan Soal</p>
+                                                </div>
+                                            </div>
+                                            <div class="mt-3 pt-2 text-end" style="border-top:1px dashed rgba(255,255,255,0.3);">
+                                                <Link :href="`/user/categories/${category.id}/lesson-categories`" 
+                                                    class="fw-bold text-decoration-none"
+                                                    style="color:#fff; font-size:0.9rem;">
+                                                    Lihat Soal <i class="bx bx-right-arrow-alt"></i>
+                                                </Link>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- ✅ MODUL / MATERI -->
+                                <div class="col-lg-3 col-md-6 col-sm-12 mb-4"
+                                    v-if="($page.props.auth.user.member_type == 1 && $page.props.setting.free_member_access.some(item => item.code === 'module')) 
+                                    || ($page.props.auth.user.member_type == 2 && $page.props.setting.paid_member_access.some(item => item.code === 'module'))">
+
+                                    <div class="card rounded-4 h-100"
+                                        style="background: linear-gradient(135deg, #fd7e14, #ffa54d); color:#fff; border:none; transition:all 0.3s; cursor:pointer;"
+                                        @mouseover="event.currentTarget.style.transform='translateY(-5px)'; event.currentTarget.style.boxShadow='0 8px 20px rgba(253,126,20,0.4)'"
+                                        @mouseleave="event.currentTarget.style.transform='translateY(0)'; event.currentTarget.style.boxShadow='none'">
+
+                                        <div class="card-body">
+                                            <div class="d-flex align-items-center mb-2">
+                                                <a href="/user/modules">
+                                                <div style="width:55px; height:55px; display:flex; justify-content:center; align-items:center; margin-right:15px;
+                                                            border-radius:50%; background:rgba(255,255,255,0.25);">
+                                                    <i class="bx bx-file" style="font-size:1.6rem; color:#fff;"></i>
+                                                </div>
+                                                </a>
+                                                <div class="flex-grow-1 text-end">
+                                                    <h4 class="my-1 fw-bolder" style="font-size:2rem; color:white;">{{ category.module_count }}</h4>
+                                                    <p class="mb-0" style="opacity:0.9;">Modul / Materi</p>
+                                                </div>
+                                            </div>
+                                            <div class="mt-3 pt-2 text-end" style="border-top:1px dashed rgba(255,255,255,0.3);">
+                                                <Link href="/user/modules" 
+                                                    class="fw-bold text-decoration-none"
+                                                    style="color:#fff; font-size:0.9rem;">
+                                                    Lihat Modul <i class="bx bx-right-arrow-alt"></i>
+                                                </Link>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- ✅ VIDEO BELAJAR -->
+                                <div class="col-lg-3 col-md-6 col-sm-12 mb-4"
+                                    v-if="($page.props.auth.user.member_type == 1 && $page.props.setting.free_member_access.some(item => item.code === 'video_module')) 
+                                    || ($page.props.auth.user.member_type == 2 && $page.props.setting.paid_member_access.some(item => item.code === 'video_module'))">
+
+                                    <div class="card rounded-4 h-100"
+                                        style="background: linear-gradient(135deg, #0d6efd, #409cff); color:#fff; border:none; transition:all 0.3s; cursor:pointer;"
+                                        @mouseover="event.currentTarget.style.transform='translateY(-5px)'; event.currentTarget.style.boxShadow='0 8px 20px rgba(13,110,253,0.4)'"
+                                        @mouseleave="event.currentTarget.style.transform='translateY(0)'; event.currentTarget.style.boxShadow='none'">
+                                        
+                                        <div class="card-body">
+                                            <div class="d-flex align-items-center mb-2">
+                                                <a href="/user/video-modules">
+                                                <div style="width:55px; height:55px; display:flex; justify-content:center; align-items:center; margin-right:15px;
+                                                            border-radius:50%; background:rgba(255,255,255,0.25);">
+                                                    <i class="bx bx-video-recording" style="font-size:1.6rem; color:#fff;"></i>
+                                                </div>
+                                                </a>
+                                                <div class="flex-grow-1 text-end">
+                                                    <h4 class="my-1 fw-bolder" style="font-size:2rem; color:white;">{{ category.video_module_count }}</h4>
+                                                    <p class="mb-0" style="opacity:0.9;">Video Belajar</p>
+                                                </div>
+                                            </div>
+                                            <div class="mt-3 pt-2 text-end" style="border-top:1px dashed rgba(255,255,255,0.3);">
+                                                <Link href="/user/video-modules" 
+                                                    class="fw-bold text-decoration-none"
+                                                    style="color:#fff; font-size:0.9rem;">
+                                                    Lihat Video <i class="bx bx-right-arrow-alt"></i>
+                                                </Link>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                </div>
+                            </div>
+                            
+                    <div class="col-12"><hr v-if="index < totalDataInCategories.slice(0, 4).length - 1"></div> 
+
+                    </template>
+                    </div>
+                </div>
+
+
             </div>
 
             <div class="card" v-if="banners.length > 0">

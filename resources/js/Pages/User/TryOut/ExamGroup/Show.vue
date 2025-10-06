@@ -32,6 +32,8 @@
                         <div v-html="$page.props.session.success"></div>
                     </div>
                 </div>
+
+                <!-- 
                 <div class="col-lg-12">
                     <div class="card">
                         <div class="card-header bg-primary">
@@ -49,7 +51,9 @@
                         </div>
                     </div>
                 </div>
-
+                -->
+                
+                <!--
                 <div class="col-lg-12">
                     <div class="card">
                         <div class="card-header bg-primary">
@@ -65,7 +69,11 @@
                                 <div class="table-responsive">
                                     <table class="table mb-0">
                                         <tbody>
-                                            <!-- <tr>
+
+
+                                            //disini kode nonaktif fardan
+
+                                            <tr>
                                                 <th>Nama</th>
                                                 <td>:</td>
                                                 <td>{{ $page.props.auth.user.name }}</td>
@@ -82,7 +90,11 @@
                                             </tr>
                                             <tr>
                                                 <td colspan="3">&nbsp;</td>
-                                            </tr> -->
+                                            </tr> 
+
+                                            //disini kode nonaktif fardan
+
+
                                             <tr>
                                                 <th width="300px">Peminatan</th>
                                                 <td width="2px">:</td>
@@ -147,6 +159,7 @@
                         </div>
                     </div>
                 </div>
+                -->
 
                 <div class="col-lg-12">
                     <div class="card">
