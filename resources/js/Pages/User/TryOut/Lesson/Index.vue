@@ -72,11 +72,8 @@
                   <span class="chip-muted">{{ lesson?.lesson_category?.category?.name || 'Kategori' }}</span>
                 </div>
 
+                <!-- NOTE: class clamp-1 dipertahankan, tapi ditimpa di CSS agar judul bisa wrap -->
                 <h6 class="title clamp-1 mb-1">{{ lesson.name }}</h6>
-
-                <p class="desc text-muted clamp-2 mb-0">
-                  Kerjakan soal sesuai dengan perintah yang terdapat dalam informasi.
-                </p>
               </div>
 
               <!-- CTA -->
@@ -182,7 +179,15 @@ export default {
 
 /* Teks */
 .title{ font-weight:800; letter-spacing:.2px; color:#0f172a; }
-.desc{ font-size:.92rem; color:#64748b; }
+
+/* >>> Override clamp pada judul agar bisa multi-baris (sesuai permintaan) */
+.lesson-row .title{
+  display:block;
+  overflow:visible;
+  white-space:normal;         /* biar turun ke bawah saat panjang */
+  -webkit-line-clamp:unset;   /* matikan clamp */
+  line-clamp:unset;
+}
 
 /* CTA */
 .cta{
@@ -192,16 +197,33 @@ export default {
 }
 .cta:hover{ transform:translateY(-2px); filter:brightness(1.03); box-shadow:0 10px 24px rgba(37,99,235,.18); }
 
-/* Clamp teks (aman untuk toolchain) */
-.clamp-1, .clamp-2{
-  overflow:hidden; display:-webkit-box; -webkit-box-orient:vertical;
-}
-.clamp-1{ -webkit-line-clamp:1; line-clamp:1; }
-.clamp-2{ -webkit-line-clamp:2; line-clamp:2; }
-
-/* Responsif */
+/* Responsif (mobile-first) */
 @media (max-width: 576px){
-  .icon-box{ min-width:48px; height:48px; font-size:1.35rem; border-radius:12px; }
-  .cta{ padding:.42rem .8rem; }
+  /* Susun ulang isi card agar tidak sempit: CTA pindah ke bawah dan full width */
+  .lesson-row .card-body{
+    flex-wrap:wrap;                 /* konten bisa turun */
+  }
+  .icon-box{ 
+    min-width:48px; height:48px; 
+    font-size:1.35rem; border-radius:12px; 
+  }
+  .cta{
+    width:100%;                     /* tombol lebar penuh di mobile */
+    margin-top:.25rem;
+    padding:.6rem .9rem;
+  }
+  /* Pastikan judul tampil nyaman di layar kecil */
+  .lesson-row .title{
+    font-size:1rem;
+    line-height:1.35;
+    margin-bottom:.25rem;
+  }
+}
+
+/* Aksesibilitas: kurangi animasi */
+@media (prefers-reduced-motion: reduce){
+  .cta, .cta:hover, .lesson-row, .lesson-row:hover{
+    transition:none; transform:none; box-shadow:none;
+  }
 }
 </style>
