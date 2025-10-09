@@ -26,54 +26,11 @@
                   style="max-width:200px; height:56px; object-fit:contain;"
                 />
                 <!--<h3 class="fw-semibold" style="margin:.75rem 0 .25rem;">Registrasi</h3>-->
-                <br><br>
-               <p
-                  class="text-muted small"
-                  style="
-                    margin-bottom:.7rem;
-                    text-align:center;
-                    font-family:'Inter',sans-serif;
-                    font-size:.9rem;
-                    color:#6b7280;
-                    display:flex;
-                    justify-content:center;
-                    align-items:center;
-                    gap:.45rem;
-                    flex-wrap:wrap;
-                  "
-                >
-                  <span>Punya akun?</span>
-                  <Link
-                    href='/login'
-                    style="
-                      display:inline-flex;
-                      align-items:center;
-                      justify-content:center;
-                      gap:.4rem;
-                      padding:.45rem 1rem;
-                      border-radius:9999px;
-                      background:linear-gradient(135deg,#3b82f6 0%,#2563eb 100%);
-                      color:#fff;
-                      font-weight:600;
-                      font-size:.9rem;
-                      text-decoration:none;
-                      box-shadow:0 3px 10px rgba(37,99,235,0.35);
-                      cursor:pointer;
-                      transition:all 0.3s ease;
-                    "
-                    onmouseover="this.style.transform='translateY(-2px) scale(1.03)'; this.style.boxShadow='0 8px 18px rgba(37,99,235,0.45)'; this.style.filter='brightness(1.05)';"
-                    onmouseout="this.style.transform='translateY(0) scale(1)'; this.style.boxShadow='0 3px 10px rgba(37,99,235,0.35)'; this.style.filter='none';"
-                  >
-                    <!-- Ikon login -->
-                    <svg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='none' stroke='white' stroke-width='1.7' stroke-linecap='round' stroke-linejoin='round' viewBox='0 0 24 24'>
-                      <path d='M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4'/>
-                      <polyline points='10 17 15 12 10 7'/>
-                      <line x1='15' y1='12' x2='3' y2='12'/>
-                    </svg>
-                    <span>Login di sini</span>
-                  </Link>
-                </p>
+                <br>
 
+                <h1 class="h5 fw-semibold mt-3 mb-1">Daftar Akun</h1>
+                <p class="text-muted mb-0 small">Buat Akun dan mulai belajar bersama kami!</p>
+                
               </div>
 
               <!-- Alerts -->
@@ -408,6 +365,56 @@
                   <i class="bx bx-user" style="margin-right:6px;"></i> Registrasi
                 </button>
               </form>
+
+              <br>
+
+              <p
+                  class="text-muted small"
+                  style="
+                    margin-bottom:.7rem;
+                    text-align:center;
+                    font-family:'Inter',sans-serif;
+                    font-size:.9rem;
+                    color:#6b7280;
+                    display:flex;
+                    justify-content:center;
+                    align-items:center;
+                    gap:.45rem;
+                    flex-wrap:wrap;
+                  "
+                >
+                  <span>Punya akun?</span>
+                  <Link
+                    href='/login'
+                    style="
+                      display:inline-flex;
+                      align-items:center;
+                      justify-content:center;
+                      gap:.4rem;
+                      padding:.45rem 1rem;
+                      border-radius:9999px;
+                      background:linear-gradient(135deg,#3b82f6 0%,#2563eb 100%);
+                      color:#fff;
+                      font-weight:600;
+                      font-size:.9rem;
+                      text-decoration:none;
+                      box-shadow:0 3px 10px rgba(37,99,235,0.35);
+                      cursor:pointer;
+                      transition:all 0.3s ease;
+                    "
+                    onmouseover="this.style.transform='translateY(-2px) scale(1.03)'; this.style.boxShadow='0 8px 18px rgba(37,99,235,0.45)'; this.style.filter='brightness(1.05)';"
+                    onmouseout="this.style.transform='translateY(0) scale(1)'; this.style.boxShadow='0 3px 10px rgba(37,99,235,0.35)'; this.style.filter='none';"
+                  >
+                    <!-- Ikon login -->
+                    <svg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='none' stroke='white' stroke-width='1.7' stroke-linecap='round' stroke-linejoin='round' viewBox='0 0 24 24'>
+                      <path d='M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4'/>
+                      <polyline points='10 17 15 12 10 7'/>
+                      <line x1='15' y1='12' x2='3' y2='12'/>
+                    </svg>
+                    <span>Login di sini</span>
+                  </Link>
+                </p>
+
             </div>
           </div>
         </div>
